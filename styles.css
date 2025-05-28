@@ -2124,20 +2124,20 @@ body {
     }
     
     .about-left {
-        flex-direction: row;
+        flex-direction: column;
         gap: 2rem;
         width: 100%;
     }
     
     .sports-background {
-        flex: 1;
-        width: calc(50% - 1rem);
+        flex: none;
+        width: 100%;
         min-width: 0;
     }
     
     .skill-tree-section {
-        flex: 1;
-        width: calc(50% - 1rem);
+        flex: none;
+        width: 100%;
         min-width: 0;
     }
     
@@ -2367,6 +2367,24 @@ body {
     .about-main {
         flex-direction: column;
         gap: 2rem;
+    }
+    
+    .about-left {
+        flex-direction: column;
+        gap: 2rem;
+        width: 100%;
+    }
+    
+    .sports-background {
+        flex: none;
+        width: 100%;
+        min-width: 0;
+    }
+    
+    .skill-tree-section {
+        flex: none;
+        width: 100%;
+        min-width: 0;
     }
     
     .about-stats {
