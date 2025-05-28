@@ -2617,63 +2617,6 @@ body {
     color: #ffffff !important;
 }
 
-/* Backend Title Styling */
-.backend-title {
-    font-size: 1.4rem !important;
-    font-weight: 600 !important;
-    margin-bottom: 0.8rem !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 0.2rem !important;
-}
-
-.backend-text {
-    background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 25%, #ffffff 50%, #e8e8e8 75%, #ffffff 100%);
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: whiteGradientShift 4s ease-in-out infinite;
-    font-family: 'JetBrains Mono', monospace;
-    letter-spacing: 0.05em;
-    text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
-    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
-}
-
-/* Developer Name Styling */
-.developer-name {
-    font-size: 1.8rem !important;
-    font-weight: 700 !important;
-    margin: 0.5rem 0 !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    gap: 0.2rem !important;
-}
-
-.name-text {
-    background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 25%, #ffffff 50%, #f0f0f0 75%, #ffffff 100%);
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: whiteGradientShift 3s ease-in-out infinite;
-    font-family: 'JetBrains Mono', monospace;
-    letter-spacing: 0.1em;
-    text-shadow: 0 0 40px rgba(255, 255, 255, 0.6);
-    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.4));
-}
-
-.typing-cursor {
-    color: #ffffff;
-    font-weight: 300;
-    animation: blink 1s infinite;
-    font-size: 1.6rem;
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
-    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
-}
-
 @keyframes whiteGradientShift {
     0%, 100% {
         background-position: 0% 50%;
@@ -2690,4 +2633,94 @@ body {
     51%, 100% {
         opacity: 0;
     }
-} 
+}
+
+/* Typing Container Styling */
+.typing-container {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 0.3rem;
+    min-height: 120px;
+    position: relative;
+    width: 100%;
+}
+
+.typing-text {
+    font-family: 'JetBrains Mono', monospace;
+    text-align: center;
+    line-height: 1.4;
+    min-height: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    flex: 1;
+}
+
+.typing-text .backend-line {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 25%, #ffffff 50%, #e8e8e8 75%, #ffffff 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: whiteGradientShift 4s ease-in-out infinite;
+    letter-spacing: 0.05em;
+    text-shadow: 0 0 30px rgba(255, 255, 255, 0.5);
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.3));
+    transition: all 0.3s ease;
+    display: block;
+    width: 100%;
+}
+
+.typing-text .name-line {
+    font-size: 1.8rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f8f8 25%, #ffffff 50%, #f0f0f0 75%, #ffffff 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: whiteGradientShift 3s ease-in-out infinite;
+    letter-spacing: 0.1em;
+    text-shadow: 0 0 40px rgba(255, 255, 255, 0.6);
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.4));
+    transition: all 0.3s ease;
+    display: block;
+    width: 100%;
+}
+
+.typing-text.typing .backend-line,
+.typing-text.typing .name-line {
+    text-shadow: 0 0 50px rgba(255, 255, 255, 0.9);
+    filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.6));
+}
+
+.typing-cursor {
+    color: #ffffff;
+    font-weight: 300;
+    animation: blink 1s infinite;
+    font-size: 1.6rem;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+    transition: opacity 0.5s ease;
+    position: absolute;
+    bottom: 0;
+    right: -0.5rem;
+    height: 1.6rem;
+    display: flex;
+    align-items: flex-end;
+}
+
+.typing-cursor.hide {
+    opacity: 0;
+}
+
+.typing-cursor.typing {
+    animation: blink 0.8s infinite;
+}
+  

@@ -243,20 +243,204 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Typing effect for hero title
-function typeWriter(element, text, speed = 100) {
-    let i = 0;
-    element.innerHTML = '';
+// 연속 타이핑 애니메이션 시스템
+class ContinuousTypingAnimation {
+    constructor(element, cursorElement) {
+        this.element = element;
+        this.cursor = cursorElement;
+        this.isRunning = false;
+        this.currentStep = 0;
+        
+        // 애니메이션 시퀀스 정의
+        this.sequence = [
+            {
+                type: 'type',
+                text: 'Backend Developer',
+                speed: 80,
+                className: 'backend-line'
+            },
+            {
+                type: 'newline',
+                delay: 300
+            },
+            {
+                type: 'type',
+                text: '노 영 오',
+                speed: 120,
+                className: 'name-line'
+            },
+            {
+                type: 'pause',
+                duration: 2000
+            },
+            {
+                type: 'erase_all',
+                speed: 50
+            },
+            {
+                type: 'pause',
+                duration: 1000
+            }
+        ];
+    }
     
-    function type() {
-        if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
+    start() {
+        if (this.isRunning) return;
+        this.isRunning = true;
+        this.currentStep = 0;
+        this.showCursor();
+        this.executeStep();
+    }
+    
+    stop() {
+        this.isRunning = false;
+        this.hideCursor();
+    }
+    
+    showCursor() {
+        if (this.cursor) {
+            this.cursor.classList.add('typing');
+            this.cursor.classList.remove('hide');
         }
     }
-    type();
+    
+    hideCursor() {
+        if (this.cursor) {
+            this.cursor.classList.remove('typing');
+            this.cursor.classList.add('hide');
+        }
+    }
+    
+    executeStep() {
+        if (!this.isRunning) return;
+        
+        const step = this.sequence[this.currentStep];
+        if (!step) {
+            // 시퀀스 완료, 처음부터 다시 시작
+            this.currentStep = 0;
+            setTimeout(() => this.executeStep(), 500);
+            return;
+        }
+        
+        switch (step.type) {
+            case 'type':
+                this.typeText(step.text, step.speed, step.className);
+                break;
+            case 'newline':
+                this.addNewline(step.delay);
+                break;
+            case 'pause':
+                this.pause(step.duration);
+                break;
+            case 'erase_all':
+                this.eraseAll(step.speed);
+                break;
+        }
+    }
+    
+    typeText(text, speed, className) {
+        let i = 0;
+        const span = document.createElement('span');
+        span.className = className;
+        this.element.appendChild(span);
+        
+        // 타이핑 효과 추가
+        this.element.classList.add('typing');
+        
+        const typeChar = () => {
+            if (!this.isRunning) return;
+            
+            if (i < text.length) {
+                span.textContent += text.charAt(i);
+                i++;
+                setTimeout(typeChar, speed + Math.random() * 30); // 자연스러운 속도 변화
+            } else {
+                // 타이핑 완료
+                this.element.classList.remove('typing');
+                this.nextStep();
+            }
+        };
+        
+        typeChar();
+    }
+    
+    addNewline(delay = 0) {
+        setTimeout(() => {
+            if (!this.isRunning) return;
+            this.element.appendChild(document.createElement('br'));
+            this.nextStep();
+        }, delay);
+    }
+    
+    pause(duration) {
+        setTimeout(() => {
+            if (!this.isRunning) return;
+            this.nextStep();
+        }, duration);
+    }
+    
+    eraseAll(speed) {
+        const allText = this.element.textContent;
+        let currentLength = allText.length;
+        
+        // 지우기 효과 추가
+        this.element.classList.add('typing');
+        
+        const eraseChar = () => {
+            if (!this.isRunning) return;
+            
+            if (currentLength > 0) {
+                // 마지막 문자 제거
+                const spans = this.element.querySelectorAll('span');
+                const lastSpan = spans[spans.length - 1];
+                
+                if (lastSpan && lastSpan.textContent.length > 0) {
+                    lastSpan.textContent = lastSpan.textContent.slice(0, -1);
+                } else if (lastSpan && lastSpan.textContent.length === 0) {
+                    lastSpan.remove();
+                }
+                
+                // br 태그도 제거
+                const brs = this.element.querySelectorAll('br');
+                if (brs.length > 0 && Math.random() > 0.7) {
+                    brs[brs.length - 1].remove();
+                }
+                
+                currentLength--;
+                setTimeout(eraseChar, speed + Math.random() * 20);
+            } else {
+                // 모든 내용 완전 삭제
+                this.element.innerHTML = '';
+                this.element.classList.remove('typing');
+                this.nextStep();
+            }
+        };
+        
+        eraseChar();
+    }
+    
+    nextStep() {
+        this.currentStep++;
+        setTimeout(() => this.executeStep(), 100);
+    }
 }
+
+// 기존 타이핑 관련 함수들 제거하고 새로운 시스템으로 교체
+let typingAnimation = null;
+
+// 페이지 로드 시 연속 타이핑 애니메이션 시작
+document.addEventListener('DOMContentLoaded', () => {
+    // 로딩 화면이 끝난 후 타이핑 애니메이션 시작
+    setTimeout(() => {
+        const typingDisplay = document.getElementById('typing-display');
+        const cursor = document.querySelector('.typing-cursor');
+        
+        if (typingDisplay && cursor) {
+            typingAnimation = new ContinuousTypingAnimation(typingDisplay, cursor);
+            typingAnimation.start();
+        }
+    }, 2500); // 로딩 화면이 끝나고 0.5초 후 시작
+});
 
 // Dynamic skill progress animation
 function animateSkills() {
