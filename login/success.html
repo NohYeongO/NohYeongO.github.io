@@ -109,30 +109,41 @@
     </div>
 
     <script>
-        // URL에서 사용자 정보 파라미터 추출
-        const urlParams = new URLSearchParams(window.location.search);
-        const username = urlParams.get('username');
-        const role = urlParams.get('role');
-        const githubId = urlParams.get('githubId') || username; // githubId가 없으면 username 사용
+        console.log('success.html - 로그인 성공 페이지 로드됨');
+        console.log('success.html - 전체 URL:', window.location.href);
         
-        // 사용자 정보를 blog-script.js와 호환되는 형식으로 저장
-        if (username && role) {
+        // URL에서 사용자 정보 파라미터 추출 (서버에서 전달해주는 경우)
+        const urlParams = new URLSearchParams(window.location.search);
+        const name = urlParams.get('name'); // 서버에서 'name'으로 보내줌
+        const role = urlParams.get('role');
+        const githubId = urlParams.get('githubId');
+        
+        console.log('success.html - URL 파라미터:', { name, role, githubId });
+        
+        // URL 파라미터에 사용자 정보가 있는 경우에만 저장
+        if (name && role && githubId) {
+            console.log('success.html - URL 파라미터에서 사용자 정보 발견, sessionStorage에 저장');
             const currentUser = {
                 githubId: githubId,
-                name: username,
+                name: name,
                 role: role,
                 authenticated: true,
                 loginTime: new Date().getTime()
             };
             
-            // blog-script.js에서 읽는 키로 저장
+            console.log('success.html - 저장할 사용자 정보:', currentUser);
             sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
             sessionStorage.setItem('isAuthenticated', 'true');
+            console.log('success.html - sessionStorage 저장 완료');
+        } else {
+            console.log('success.html - URL 파라미터 없음, index.html에서 서버 요청하도록 함');
         }
+        
+        // 로그인 성공 표시를 위한 플래그 설정
+        sessionStorage.setItem('loginSuccess', 'true');
         
         // 3초 후 메인 페이지로 리다이렉트
         setTimeout(() => {
-            // success.html이 /login/success.html 경로에 있으므로 상위 디렉토리로 이동
             window.location.href = '../index.html?login=success';
         }, 3000);
         

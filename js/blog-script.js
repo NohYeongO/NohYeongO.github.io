@@ -90,6 +90,9 @@ function checkUrlParams() {
         isAuthenticated = true;
         saveUserToSessionStorage();
         
+        // 즉시 UI 업데이트
+        showAuthenticatedState();
+        
         // URL 정리
         const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
         window.history.replaceState({}, document.title, cleanUrl);
@@ -103,6 +106,8 @@ function checkUrlParams() {
         window.history.replaceState({}, document.title, cleanUrl);
         
         if (isAuthenticated && currentUser) {
+            // 즉시 UI 업데이트
+            showAuthenticatedState();
             showSuccess(`${currentUser.name}님, 환영합니다!`);
         }
     }
@@ -124,16 +129,15 @@ async function initializeBlog() {
     }, maxLoadingTime);
 
     try {
-        // 세션 스토리지에 사용자 정보가 있으면 UI 바로 업데이트,
-        // 없으면 서버에 인증 상태 확인 요청
+        // 세션 스토리지에 사용자 정보가 있으면 UI만 업데이트
         let authPromise;
         if (isAuthenticated && currentUser) {
             showAuthenticatedState();
-            authPromise = Promise.resolve(); // 이미 인증된 경우 즉시 해결된 프로미스
+            authPromise = Promise.resolve(); // 서버 요청 없이 즉시 해결
         } else {
-            authPromise = checkAuthStatus().catch(error => {
-                showUnauthenticatedState(); // 실패 시 미인증 상태로
-            });
+            // 로그인 정보가 없을 때만 서버에 인증 상태 확인 요청
+            authPromise = Promise.resolve(); // 불필요한 서버 요청 제거
+            showUnauthenticatedState();
         }
 
         // 카테고리 로드 프로미스
