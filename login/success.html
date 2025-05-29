@@ -116,7 +116,7 @@
         const githubId = urlParams.get('githubId') || username; // githubId가 없으면 username 사용
         
         // 사용자 정보를 blog-script.js와 호환되는 형식으로 저장
-        if (username && email && role) {
+        if (username && role) {
             const currentUser = {
                 githubId: githubId,
                 name: username,
