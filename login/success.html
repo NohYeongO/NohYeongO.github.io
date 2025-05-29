@@ -112,18 +112,21 @@
         // URL에서 사용자 정보 파라미터 추출
         const urlParams = new URLSearchParams(window.location.search);
         const username = urlParams.get('username');
-        const email = urlParams.get('email');
         const role = urlParams.get('role');
+        const githubId = urlParams.get('githubId') || username; // githubId가 없으면 username 사용
         
-        // 사용자 정보를 sessionStorage에 저장
+        // 사용자 정보를 blog-script.js와 호환되는 형식으로 저장
         if (username && email && role) {
-            const userInfo = {
-                username: username,
-                email: email,
+            const currentUser = {
+                githubId: githubId,
+                name: username,
                 role: role,
+                authenticated: true,
                 loginTime: new Date().getTime()
             };
-            sessionStorage.setItem('userInfo', JSON.stringify(userInfo));
+            
+            // blog-script.js에서 읽는 키로 저장
+            sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
             sessionStorage.setItem('isAuthenticated', 'true');
         }
         
