@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backend Developer Portfolio</title>
+    <link rel="stylesheet" href="css/portfolio-styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading" id="loading">
+        <div class="loading-content">
+            <div class="loading-text">initializing portfolio...</div>
+            <div class="loading-subtitle">Backend Developer Environment</div>
+            <div class="loading-spinner">
+                <div class="spinner"></div>
+                <div class="loading-status">Loading modules...</div>
+            </div>
+            <div class="loading-progress">
+                <div class="progress-label">Progress: Installing dependencies</div>
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+            </div>
+            <div class="loading-code">
+                <div class="code-line"><span class="keyword">import</span> <span class="string">'portfolio.skills'</span> <span class="comment">// Loading...</span></div>
+                <div class="code-line"><span class="keyword">import</span> <span class="string">'portfolio.projects'</span> <span class="comment">// Loading...</span></div>
+                <div class="code-line"><span class="keyword">const</span> developer = <span class="keyword">new</span> BackendDeveloper() <span class="comment">// Ready!</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-text">Dev.Portfolio</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#journey" class="nav-link">Journey</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="index.html" class="nav-link">Blog</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero section-fullpage">
+        <div class="hero-container">
+            <!-- Simplified IntelliJ IDE Window -->
+            <div class="ide-window-simplified">
+                <!-- IDE Title Bar -->
+                <div class="ide-title-bar">
+                    <div class="ide-controls">
+                        <div class="ide-button close"></div>
+                        <div class="ide-button minimize"></div>
+                        <div class="ide-button maximize"></div>
+                    </div>
+                    <div class="ide-title">BackendDeveloper.java - IntelliJ IDEA</div>
+                    <div class="ide-menu">
+                        <span>File</span>
+                        <span>Edit</span>
+                        <span>View</span>
+                        <span>Run</span>
+                        <span>Tools</span>
+                        <span>Help</span>
+                    </div>
+                </div>
+
+                <!-- IDE Toolbar -->
+                <div class="ide-toolbar">
+                    <div class="toolbar-buttons">
+                        <i class="fas fa-play toolbar-icon run" title="Run"></i>
+                        <i class="fas fa-bug toolbar-icon debug" title="Debug"></i>
+                        <i class="fas fa-stop toolbar-icon stop" title="Stop"></i>
+                        <div class="toolbar-separator"></div>
+                        <i class="fas fa-save toolbar-icon" title="Save"></i>
+                        <i class="fas fa-search toolbar-icon" title="Find"></i>
+                    </div>
+                    <div class="breadcrumb">
+                        src > main > java > portfolio > BackendDeveloper.java
+                    </div>
+                </div>
+
+                <!-- IDE Main Content -->
+                <div class="ide-main-content-simplified">
+                    <!-- Code Editor Area -->
+                    <div class="ide-editor-area-simplified">
+                        <!-- File Tabs -->
+                        <div class="file-tabs">
+                            <div class="file-tab active">
+                                <i class="fab fa-java"></i>
+                                BackendDeveloper.java
+                                <span class="tab-close">×</span>
+                            </div>
+                        </div>
+
+                        <!-- Code Editor -->
+                        <div class="ide-content">
+                            <!-- Line Numbers -->
+                            <div class="line-numbers">
+                                <div class="line-number">1</div>
+                                <div class="line-number">2</div>
+                                <div class="line-number">3</div>
+                                <div class="line-number">4</div>
+                                <div class="line-number">5</div>
+                                <div class="line-number">6</div>
+                                <div class="line-number">7</div>
+                                <div class="line-number">8</div>
+                                <div class="line-number">9</div>
+                                <div class="line-number">10</div>
+                                <div class="line-number">11</div>
+                                <div class="line-number">12</div>
+                                <div class="line-number">13</div>
+                                <div class="line-number">14</div>
+                                <div class="line-number">15</div>
+                                <div class="line-number">16</div>
+                                <div class="line-number">17</div>
+                                <div class="line-number">18</div>
+                                <div class="line-number">19</div>
+                            </div>
+
+                            <!-- Code Editor -->
+                            <div class="code-editor">
+                                <div class="code-line"><span class="keyword">package</span> <span class="package">portfolio</span><span class="punctuation">;</span></div>
+                                <div class="code-line"></div>
+                                <div class="code-line"><span class="keyword">import</span> <span class="package">org.slf4j.*</span><span class="punctuation">;</span></div>
+                                <div class="code-line"><span class="keyword">import</span> <span class="package">java.util.*</span><span class="punctuation">;</span></div>
+                                <div class="code-line"></div>
+                                <div class="code-line"><span class="keyword">public class</span> <span class="class-name">BackendDeveloper</span> <span class="punctuation">{</span></div>
+                                <div class="code-line">    <span class="keyword">private static final</span> <span class="type">Logger</span> <span class="variable">log</span> <span class="operator">=</span> <span class="method">LoggerFactory</span><span class="punctuation">.</span><span class="method">getLogger</span><span class="punctuation">(</span><span class="class-name">BackendDeveloper</span><span class="punctuation">.</span><span class="keyword">class</span><span class="punctuation">);</span></div>
+                                <div class="code-line"></div>
+                                <div class="code-line">    <span class="keyword">public static void</span> <span class="method">main</span><span class="punctuation">(</span><span class="type">String</span><span class="punctuation">[]</span> <span class="parameter">args</span><span class="punctuation">) {</span></div>
+                                <div class="code-line">        <span class="variable">log</span><span class="punctuation">.</span><span class="method">info</span><span class="punctuation">(</span><span class="string">"안녕하세요! 백엔드 개발자 노영오입니다! 🚀"</span><span class="punctuation">);</span></div>
+                                <div class="code-line"></div>
+                                <div class="code-line">        <span class="type">List</span><span class="operator">&lt;</span><span class="type">String</span><span class="operator">&gt;</span> <span class="variable">schools</span> <span class="operator">=</span> <span class="type">List</span><span class="punctuation">.</span><span class="method">of</span><span class="punctuation">(</span><span class="string">"화순고등학교"</span><span class="punctuation">,</span> <span class="string">"공주대학교(소프트웨어학과)"</span><span class="punctuation">);</span></div>
+                                <div class="code-line">        <span class="type">List</span><span class="operator">&lt;</span><span class="type">String</span><span class="operator">&gt;</span> <span class="variable">certificates</span> <span class="operator">=</span> <span class="type">List</span><span class="punctuation">.</span><span class="method">of</span><span class="punctuation">(</span><span class="string">"정보처리산업기사"</span><span class="punctuation">,</span> <span class="string">"SQLD"</span><span class="punctuation">);</span></div>
+                                <div class="code-line"></div>
+                                <div class="code-line">        <span class="variable">schools</span><span class="punctuation">.</span><span class="method">forEach</span><span class="punctuation">(</span><span class="variable">school</span> <span class="operator">-&gt;</span> <span class="variable">log</span><span class="punctuation">.</span><span class="method">info</span><span class="punctuation">(</span><span class="string">"Education: {}"</span><span class="punctuation">,</span> <span class="variable">school</span><span class="punctuation">));</span></div>
+                                <div class="code-line">        <span class="variable">certificates</span><span class="punctuation">.</span><span class="method">forEach</span><span class="punctuation">(</span><span class="variable">cert</span> <span class="operator">-&gt;</span> <span class="variable">log</span><span class="punctuation">.</span><span class="method">info</span><span class="punctuation">(</span><span class="string">"Certificate: {}"</span><span class="punctuation">,</span> <span class="variable">cert</span><span class="punctuation">));</span></div>
+                                <div class="code-line">        <span class="variable">log</span><span class="punctuation">.</span><span class="method">info</span><span class="punctuation">(</span><span class="string">"Status: 공주대학교 재학 중 📚"</span><span class="punctuation">);</span></div>
+                                <div class="code-line">    <span class="punctuation">}</span></div>
+                                <div class="code-line"><span class="punctuation">}</span></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Panel - Profile -->
+                    <div class="ide-right-panel">
+                        <div class="panel-header">Developer Info</div>
+                        <div class="profile-section">
+                            <div class="profile-card">
+                                <img src="assets/images/증명사진.JPG" alt="Profile" class="profile-img">
+                                <div class="profile-info">
+                                    <div class="typing-container">
+                                        <div class="typing-text" id="typing-display"></div>
+                                        <span class="typing-cursor">|</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="hero-buttons">
+                                <a href="#projects" class="btn btn-primary">
+                                    <i class="fas fa-code"></i> 프로젝트 보기
+                                </a>
+                                <a href="https://docs.google.com/document/d/1r76OKAPg_5RoIxzph4nD6GVwH7rMFm19/edit?usp=sharing&ouid=108527151123255847139&rtpof=true&sd=true" class="btn btn-secondary" target="_blank">
+                                    <i class="fas fa-file-alt"></i> 이력서 보기
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- IDE Status Bar -->
+                <div class="ide-status-bar">
+                    <div class="status-left">
+                        <span class="status-item"><i class="fas fa-check-circle"></i> No errors</span>
+                        <span class="status-item">UTF-8</span>
+                        <span class="status-item">LF</span>
+                        <span class="status-item">Java 17</span>
+                    </div>
+                    <div class="status-right">
+                        <span class="status-item">Ln 19, Col 1</span>
+                        <span class="status-item">100%</span>
+                        <span class="status-item"><i class="fas fa-git-alt"></i> main</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about section-fullpage">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-header">
+                    <h3>Backend Developer</h3>
+                    <p>안정적이고 확장 가능한 시스템을 구축하는 개발자입니다</p>
+                </div>
+                
+                <div class="about-main">
+                    <div class="about-left">
+                        <div class="sports-background">
+                            <h4>운동선수 출신 개발자의 강점</h4>
+                            <div class="sports-skills">
+                                <div class="sport-item">
+                                    <div class="sport-icon">💪</div>
+                                    <div class="sport-text">
+                                        <strong>체력과 지구력</strong>
+                                        <p>장시간 집중이 필요한 개발 업무에서도 꾸준한 성과를 낼 수 있습니다.</p>
+                                    </div>
+                                </div>
+                                <div class="sport-item">
+                                    <div class="sport-icon">🎯</div>
+                                    <div class="sport-text">
+                                        <strong>집중력과 정확성</strong>
+                                        <p>복잡한 문제 상황에서도 차분하게 분석하고 해결책을 찾아냅니다.</p>
+                                    </div>
+                                </div>
+                                <div class="sport-item">
+                                    <div class="sport-icon">🤝</div>
+                                    <div class="sport-text">
+                                        <strong>팀워크와 협업</strong>
+                                        <p>팀의 목표를 위해 개인의 역할을 충실히 수행하며 동료들과 원활히 소통합니다.</p>
+                                    </div>
+                                </div>
+                                <div class="sport-item">
+                                    <div class="sport-icon">🛡️</div>
+                                    <div class="sport-text">
+                                        <strong>압박 상황 대처</strong>
+                                        <p>긴급한 장애 상황이나 데드라인 압박에서도 침착하게 대응할 수 있습니다.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="skill-tree-section">
+                            <h4>Tech Stack</h4>
+                            <div class="skills">
+                                <div class="skill-item">
+                                    <i class="fab fa-java skill-icon"></i>
+                                    <span>Java</span>
+                                </div>
+                                <div class="skill-item">
+                                    <i class="fas fa-leaf skill-icon"></i>
+                                    <span>Spring Boot</span>
+                                </div>
+                                <div class="skill-item">
+                                    <i class="fas fa-fire skill-icon"></i>
+                                    <span>Redis</span>
+                                </div>
+                                <div class="skill-item">
+                                    <i class="fas fa-bolt skill-icon"></i>
+                                    <span>Kafka</span>
+                                </div>
+                                <div class="skill-item">
+                                    <i class="fas fa-database skill-icon"></i>
+                                    <span>Oracle</span>
+                                </div>
+                                <div class="skill-item">
+                                    <i class="fas fa-database skill-icon"></i>
+                                    <span>MySQL</span>
+                                </div>
+                                <div class="skill-item">
+                                    <i class="fab fa-aws skill-icon"></i>
+                                    <span>AWS</span>
+                                </div>
+                                <div class="skill-item">
+                                    <i class="fas fa-cloud skill-icon"></i>
+                                    <span>NCP</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="about-right">
+                        <div class="about-stats">
+                            <div class="stat-item">
+                                <h4>☕</h4>
+                                <p>개발 연료<br><small>하루 3잔의 커피로 집중력 유지</small></p>
+                            </div>
+                            <div class="stat-item">
+                                <h4>🐛</h4>
+                                <p>문제 해결<br><small>버그를 찾아 해결하는 것을 즐김</small></p>
+                            </div>
+                            <div class="stat-item">
+                                <h4>⚡</h4>
+                                <p>성능 최적화<br><small>더 나은 사용자 경험을 위한 개선</small></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Journey Section -->
+    <section id="journey" class="journey section-fullpage">
+        <div class="container">
+            <h2 class="section-title">Development Journey</h2>
+            <p class="section-subtitle">백엔드 개발자로 성장해온 과정을 소개합니다</p>
+            
+            <div class="journey-grid">
+                <div class="journey-item">
+                    <div class="journey-year">2023.12</div>
+                    <div class="journey-card">
+                        <div class="journey-icon">🎓</div>
+                        <h3>개발 교육 시작</h3>
+                        <p>KH정보교육원에서 풀스택 개발 과정을 시작했습니다. Java 기초부터 Spring Framework까지 체계적으로 학습하며 개발의 기초를 다졌습니다.</p>
+                    </div>
+                </div>
+
+                <div class="journey-item">
+                    <div class="journey-year">2024.06</div>
+                    <div class="journey-card">
+                        <div class="journey-icon">🏆</div>
+                        <h3>교육 과정 수료</h3>
+                        <p>6개월간의 집중 교육을 통해 Java, Spring Boot, 데이터베이스 등 백엔드 개발의 핵심 기술을 습득했습니다.</p>
+                    </div>
+                </div>
+
+                <div class="journey-item">
+                    <div class="journey-year">2024.07</div>
+                    <div class="journey-card">
+                        <div class="journey-icon">💼</div>
+                        <h3>개발자 커리어 시작</h3>
+                        <p>부팅 주식회사에 웹개발자로 입사하여 실무 개발자로서의 첫 걸음을 시작했습니다.</p>
+                    </div>
+                </div>
+
+                <div class="journey-item">
+                    <div class="journey-year">2024.07-2025.03</div>
+                    <div class="journey-card">
+                        <div class="journey-icon">🛠️</div>
+                        <h3>IMSOHIT 시스템 고도화</h3>
+                        <p>한국국제보건의료재단의 <a href="https://imsohit.kofih.org/uat/uia/actionMain.do" target="_blank" style="color: #667eea; text-decoration: none;">IMSOHIT 시스템</a> 고도화 프로젝트를 담당했습니다. 레거시 코드 리팩토링과 성능 최적화를 통해 시스템을 개선했습니다.</p>
+                    </div>
+                </div>
+
+                <div class="journey-item">
+                    <div class="journey-year">2024.09-11</div>
+                    <div class="journey-card">
+                        <div class="journey-icon">⚓</div>
+                        <h3>항해 플러스 백엔드 과정</h3>
+                        <p>실무와 병행하며 항해 플러스 백엔드 과정을 수료했습니다. 심화된 백엔드 지식과 실전 경험을 쌓았습니다.</p>
+                    </div>
+                </div>
+
+                <div class="journey-item">
+                    <div class="journey-year">2025.03-06</div>
+                    <div class="journey-card">
+                        <div class="journey-icon">🎯</div>
+                        <h3>F-Lab 멘토링</h3>
+                        <p>F-Lab에서 시니어 개발자의 1:1 멘토링을 받으며 코드 리뷰, 아키텍처 설계 등 전문성을 향상시켰습니다.</p>
+                    </div>
+                </div>
+
+                <div class="journey-item">
+                    <div class="journey-year">2025.03</div>
+                    <div class="journey-card">
+                        <div class="journey-icon">🏫</div>
+                        <h3>공주대학교 편입</h3>
+                        <p>더 체계적인 컴퓨터 전공 지식을 쌓기 위해 공주대학교 소프트웨어학과에 편입했습니다. 이론과 실무를 겸비한 개발자로 성장하고 있습니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects section-fullpage">
+        <div class="container">
+            <h2 class="section-title">Projects</h2>
+            <p class="section-subtitle">주요 개발 프로젝트와 성과를 소개합니다</p>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-content">
+                        <div class="project-period">2024.07 - 2025.01</div>
+                        <h3>IMSOHIT 시스템 고도화</h3>
+                        <p>
+                            한국국제보건의료재단의 보건의료 교육훈련 통합관리시스템 고도화 프로젝트입니다. 
+                            컨트롤러에 집중되어 있던 비즈니스 로직을 서비스 계층으로 분리하여 코드 구조를 개선했습니다. 
+                            레거시 시스템의 거의 모든 페이지를 새롭게 개발하며 성능과 유지보수성을 크게 향상시켰습니다.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">전자정부프레임워크</span>
+                            <span class="tech-tag">MyBatis</span>
+                            <span class="tech-tag">Oracle</span>
+                            <span class="tech-tag">JSP</span>
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">jQuery</span>
+                        </div>
+                        <div class="project-readme">
+                            <a href="https://imsohit.kofih.org/uat/uia/actionMain.do" class="readme-link" target="_blank">
+                                <i class="fas fa-globe"></i>
+                                실제 서비스 확인하기
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-content">
+                        <div class="project-period">2024.09 - 2024.11</div>
+                        <h3>E-Commerce 개인 프로젝트</h3>
+                        <p>
+                            상품조회, 주문 및 결제 등의 백엔드 서비스 개발을 중점으로 한 프로젝트입니다.
+                            동시성 제어 및 테스트코드 작성, 모니터링 시스템 구축 등을 진행하였고, 
+                            시스템의 안정성과 사용자 편의성에 어떤 기술이 적합할지 고민하며 프로젝트를 진행하였습니다. 
+                            최종 목표로는 프로젝트를 통한 백엔드 개발능력 향상을 위한 프로젝트입니다.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">Spring Boot</span>
+                            <span class="tech-tag">JPA</span>
+                            <span class="tech-tag">MySQL</span>
+                            <span class="tech-tag">Redis</span>
+                        </div>
+                        <div class="project-links-section">
+                            <a href="#" class="readme-link portfolio-detail" data-project="ecommerce">
+                                <i class="fas fa-book"></i>
+                                프로젝트 상세 설명 보기
+                            </a>
+                            <a href="https://github.com/NohYeongO/e-commerce" class="readme-link" target="_blank">
+                                <i class="fab fa-github"></i>
+                                GitHub 링크 보기
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-content">
+                        <div class="project-period">2025.04 - 2025.06</div>
+                        <h3>Zariyo 콘서트 예약 시스템</h3>
+                        <p>
+                            대용량 트래픽을 고려한 콘서트 티켓 예약 시스템입니다. 
+                            이벤트 기반 설계와 클린 아키텍처를 기반으로, Redis를 활용한 대기열 시스템 구축 및 빠른 조회 성능을 고려한 캐싱을 통해 
+                            안정적이고 사용자 경험을 고려한 콘서트 예약 시스템을 목표로 개발했습니다.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Java</span>
+                            <span class="tech-tag">Spring Boot</span>
+                            <span class="tech-tag">JPA</span>
+                            <span class="tech-tag">MySQL</span>
+                            <span class="tech-tag">Redis</span>
+                            <span class="tech-tag">Kafka</span>
+                        </div>
+                        <div class="project-links-section">
+                            <a href="#" class="readme-link portfolio-detail" data-project="zariyo">
+                                <i class="fas fa-book"></i>
+                                프로젝트 상세 설명 보기
+                            </a>
+                            <a href="https://github.com/f-lab-edu/zariyo" class="readme-link" target="_blank">
+                                <i class="fab fa-github"></i>
+                                GitHub 링크 보기
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact section-fullpage">
+        <div class="container">
+            <h2 class="section-title">Contact</h2>
+            <p class="section-subtitle">언제든지 연락주세요</p>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>연락처 정보</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>nohyo05@naver.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <span>010-6632-8214</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Seoul, Cheonan, South Korea</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-coffee"></i>
+                        <span>커피챗 환영합니다</span>
+                    </div>
+                </div>
+                
+                <div class="social-links">
+                    <h3>소셜 미디어</h3>
+                    <div class="social-buttons">
+                        <div class="contact-item" id="github-social" onclick="window.open('https://github.com/NohYeongO', '_blank')">
+                            <i class="fab fa-github"></i>
+                            <span>GitHub</span>
+                        </div>
+                        <div class="contact-item" id="linkedin-social" onclick="window.open('https://www.linkedin.com/in/%EC%98%81%EC%98%A4-%EB%85%B8-20965633b/', '_blank')">
+                            <i class="fab fa-linkedin"></i>
+                            <span>LinkedIn</span>
+                        </div>
+                        <div class="contact-item" id="instagram-social" onclick="window.open('https://www.instagram.com/zerofive_n/', '_blank')">
+                            <i class="fab fa-instagram"></i>
+                            <span>Instagram</span>
+                        </div>
+                        <div class="contact-item" id="email-social" onclick="window.open('mailto:nohyo05@naver.com', '_self')">
+                            <i class="fas fa-envelope"></i>
+                            <span>Email</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="fun-fact">
+                <p>함께 성장할 수 있는 기회를 기다리고 있습니다. 언제든 연락주세요.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Backend Developer Portfolio. Made with ❤️ and lots of ☕</p>
+        </div>
+    </footer>
+
+    <!-- Portfolio Detail Modal -->
+    <div id="portfolioModal" class="modal">
+        <div class="modal-content">
+            <div id="modalContent">
+                <!-- 모달 내용이 여기에 동적으로 추가됩니다 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/portfolio-script.js"></script>
+</body>
+</html> 

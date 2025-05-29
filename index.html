@@ -3,549 +3,365 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Backend Developer Portfolio</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Dev Blog - 개발자 기술 블로그</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Marked.js for Markdown -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    
+    <!-- Prism.js for Code Highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/autoloader/prism-autoloader.min.js"></script>
+    
+    <!-- Stylesheets -->
+    <!-- <link rel="stylesheet" href="styles.css"> --> <!-- 포트폴리오 스타일, 블로그에서는 불필요시 삭제 또는 주석 -->
+    <link rel="stylesheet" href="css/blog-styles.css">
 </head>
 <body>
-    <!-- Loading Screen -->
-    <div class="loading" id="loading">
+    <!-- 로딩 오버레이 -->
+    <div id="loading" class="loading-overlay">
         <div class="loading-content">
-            <div class="loading-text">initializing portfolio...</div>
-            <div class="loading-subtitle">Backend Developer Environment</div>
-            <div class="loading-spinner">
-                <div class="spinner"></div>
-                <div class="loading-status">Loading modules...</div>
-            </div>
-            <div class="loading-progress">
-                <div class="progress-label">Progress: Installing dependencies</div>
-                <div class="progress-bar">
-                    <div class="progress-fill"></div>
-                </div>
-            </div>
-            <div class="loading-code">
-                <div class="code-line"><span class="keyword">import</span> <span class="string">'portfolio.skills'</span> <span class="comment">// Loading...</span></div>
-                <div class="code-line"><span class="keyword">import</span> <span class="string">'portfolio.projects'</span> <span class="comment">// Loading...</span></div>
-                <div class="code-line"><span class="keyword">const</span> developer = <span class="keyword">new</span> BackendDeveloper() <span class="comment">// Ready!</span></div>
-            </div>
+            <div class="loading-spinner"></div>
+            <p>블로그를 로딩중입니다...</p>
         </div>
     </div>
 
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <span class="logo-text">Dev.Portfolio</span>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="#home" class="nav-link">Home</a></li>
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#journey" class="nav-link">Journey</a></li>
-                <li><a href="#projects" class="nav-link">Projects</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
-    </nav>
+    <!-- 블로그 컨테이너 -->
+    <div class="blog-container">
+        <!-- 사이드바 오버레이 (모바일/태블릿에서 사이드바 열릴 때 표시) -->
+        <div class="sidebar-overlay" id="sidebar-overlay"></div>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero section-fullpage">
-        <div class="hero-container">
-            <!-- Simplified IntelliJ IDE Window -->
-            <div class="ide-window-simplified">
-                <!-- IDE Title Bar -->
-                <div class="ide-title-bar">
-                    <div class="ide-controls">
-                        <div class="ide-button close"></div>
-                        <div class="ide-button minimize"></div>
-                        <div class="ide-button maximize"></div>
-                    </div>
-                    <div class="ide-title">BackendDeveloper.java - IntelliJ IDEA</div>
-                    <div class="ide-menu">
-                        <span>File</span>
-                        <span>Edit</span>
-                        <span>View</span>
-                        <span>Run</span>
-                        <span>Tools</span>
-                        <span>Help</span>
-                    </div>
-                </div>
+        <!-- 헤더 -->
+        <header class="blog-header">
+            <a href="/" class="blog-logo">
+                <i class="fas fa-code"></i>
+                <span>Dev Blog</span>
+            </a>
+            
+            <!-- 햄버거 메뉴 버튼 (모바일/태블릿용) -->
+            <button id="hamburger-btn" class="hamburger-menu" aria-label="메뉴 토글" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
 
-                <!-- IDE Toolbar -->
-                <div class="ide-toolbar">
-                    <div class="toolbar-buttons">
-                        <i class="fas fa-play toolbar-icon run" title="Run"></i>
-                        <i class="fas fa-bug toolbar-icon debug" title="Debug"></i>
-                        <i class="fas fa-stop toolbar-icon stop" title="Stop"></i>
-                        <div class="toolbar-separator"></div>
-                        <i class="fas fa-save toolbar-icon" title="Save"></i>
-                        <i class="fas fa-search toolbar-icon" title="Find"></i>
-                    </div>
-                    <div class="breadcrumb">
-                        src > main > java > portfolio > BackendDeveloper.java
-                    </div>
-                </div>
-
-                <!-- IDE Main Content -->
-                <div class="ide-main-content-simplified">
-                    <!-- Code Editor Area -->
-                    <div class="ide-editor-area-simplified">
-                        <!-- File Tabs -->
-                        <div class="file-tabs">
-                            <div class="file-tab active">
-                                <i class="fab fa-java"></i>
-                                BackendDeveloper.java
-                                <span class="tab-close">×</span>
-                            </div>
-                        </div>
-
-                        <!-- Code Editor -->
-                        <div class="ide-content">
-                            <!-- Line Numbers -->
-                            <div class="line-numbers">
-                                <div class="line-number">1</div>
-                                <div class="line-number">2</div>
-                                <div class="line-number">3</div>
-                                <div class="line-number">4</div>
-                                <div class="line-number">5</div>
-                                <div class="line-number">6</div>
-                                <div class="line-number">7</div>
-                                <div class="line-number">8</div>
-                                <div class="line-number">9</div>
-                                <div class="line-number">10</div>
-                                <div class="line-number">11</div>
-                                <div class="line-number">12</div>
-                                <div class="line-number">13</div>
-                                <div class="line-number">14</div>
-                                <div class="line-number">15</div>
-                                <div class="line-number">16</div>
-                                <div class="line-number">17</div>
-                                <div class="line-number">18</div>
-                                <div class="line-number">19</div>
-                            </div>
-
-                            <!-- Code Editor -->
-                            <div class="code-editor">
-                                <div class="code-line"><span class="keyword">package</span> <span class="package">portfolio</span><span class="punctuation">;</span></div>
-                                <div class="code-line"></div>
-                                <div class="code-line"><span class="keyword">import</span> <span class="package">org.slf4j.*</span><span class="punctuation">;</span></div>
-                                <div class="code-line"><span class="keyword">import</span> <span class="package">java.util.*</span><span class="punctuation">;</span></div>
-                                <div class="code-line"></div>
-                                <div class="code-line"><span class="keyword">public class</span> <span class="class-name">BackendDeveloper</span> <span class="punctuation">{</span></div>
-                                <div class="code-line">    <span class="keyword">private static final</span> <span class="type">Logger</span> <span class="variable">log</span> <span class="operator">=</span> <span class="method">LoggerFactory</span><span class="punctuation">.</span><span class="method">getLogger</span><span class="punctuation">(</span><span class="class-name">BackendDeveloper</span><span class="punctuation">.</span><span class="keyword">class</span><span class="punctuation">);</span></div>
-                                <div class="code-line"></div>
-                                <div class="code-line">    <span class="keyword">public static void</span> <span class="method">main</span><span class="punctuation">(</span><span class="type">String</span><span class="punctuation">[]</span> <span class="parameter">args</span><span class="punctuation">) {</span></div>
-                                <div class="code-line">        <span class="variable">log</span><span class="punctuation">.</span><span class="method">info</span><span class="punctuation">(</span><span class="string">"안녕하세요! 백엔드 개발자 노영오입니다! 🚀"</span><span class="punctuation">);</span></div>
-                                <div class="code-line"></div>
-                                <div class="code-line">        <span class="type">List</span><span class="operator">&lt;</span><span class="type">String</span><span class="operator">&gt;</span> <span class="variable">schools</span> <span class="operator">=</span> <span class="type">List</span><span class="punctuation">.</span><span class="method">of</span><span class="punctuation">(</span><span class="string">"화순고등학교"</span><span class="punctuation">,</span> <span class="string">"공주대학교(소프트웨어학과)"</span><span class="punctuation">);</span></div>
-                                <div class="code-line">        <span class="type">List</span><span class="operator">&lt;</span><span class="type">String</span><span class="operator">&gt;</span> <span class="variable">certificates</span> <span class="operator">=</span> <span class="type">List</span><span class="punctuation">.</span><span class="method">of</span><span class="punctuation">(</span><span class="string">"정보처리산업기사"</span><span class="punctuation">,</span> <span class="string">"SQLD"</span><span class="punctuation">);</span></div>
-                                <div class="code-line"></div>
-                                <div class="code-line">        <span class="variable">schools</span><span class="punctuation">.</span><span class="method">forEach</span><span class="punctuation">(</span><span class="variable">school</span> <span class="operator">-&gt;</span> <span class="variable">log</span><span class="punctuation">.</span><span class="method">info</span><span class="punctuation">(</span><span class="string">"Education: {}"</span><span class="punctuation">,</span> <span class="variable">school</span><span class="punctuation">));</span></div>
-                                <div class="code-line">        <span class="variable">certificates</span><span class="punctuation">.</span><span class="method">forEach</span><span class="punctuation">(</span><span class="variable">cert</span> <span class="operator">-&gt;</span> <span class="variable">log</span><span class="punctuation">.</span><span class="method">info</span><span class="punctuation">(</span><span class="string">"Certificate: {}"</span><span class="punctuation">,</span> <span class="variable">cert</span><span class="punctuation">));</span></div>
-                                <div class="code-line">        <span class="variable">log</span><span class="punctuation">.</span><span class="method">info</span><span class="punctuation">(</span><span class="string">"Status: 공주대학교 재학 중 📚"</span><span class="punctuation">);</span></div>
-                                <div class="code-line">    <span class="punctuation">}</span></div>
-                                <div class="code-line"><span class="punctuation">}</span></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Right Panel - Profile -->
-                    <div class="ide-right-panel">
-                        <div class="panel-header">Developer Info</div>
-                        <div class="profile-section">
-                            <div class="profile-card">
-                                <img src="https://github.com/NohYeongO/NohYeongO.github.io/blob/main/%EC%A6%9D%EB%AA%85%EC%82%AC%EC%A7%84.JPG?raw=true" alt="Profile" class="profile-img">
-                                <div class="profile-info">
-                                    <div class="typing-container">
-                                        <div class="typing-text" id="typing-display"></div>
-                                        <span class="typing-cursor">|</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="hero-buttons">
-                                <a href="#projects" class="btn btn-primary">
-                                    <i class="fas fa-code"></i> 프로젝트 보기
-                                </a>
-                                <a href="https://docs.google.com/document/d/1r76OKAPg_5RoIxzph4nD6GVwH7rMFm19/edit?usp=sharing&ouid=108527151123255847139&rtpof=true&sd=true" class="btn btn-secondary" target="_blank">
-                                    <i class="fas fa-file-alt"></i> 이력서 보기
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- IDE Status Bar -->
-                <div class="ide-status-bar">
-                    <div class="status-left">
-                        <span class="status-item"><i class="fas fa-check-circle"></i> No errors</span>
-                        <span class="status-item">UTF-8</span>
-                        <span class="status-item">LF</span>
-                        <span class="status-item">Java 17</span>
-                    </div>
-                    <div class="status-right">
-                        <span class="status-item">Ln 19, Col 1</span>
-                        <span class="status-item">100%</span>
-                        <span class="status-item"><i class="fas fa-git-alt"></i> main</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="about section-fullpage">
-        <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <div class="about-header">
-                    <h3>Backend Developer</h3>
-                    <p>안정적이고 확장 가능한 시스템을 구축하는 개발자입니다</p>
-                </div>
+            <nav class="blog-nav">
+                <!-- 포트폴리오 링크 삭제 -->
+                <ul class="nav-menu" style="display: none;"> 
+                    <!-- 다른 nav 아이템이 없으므로 일단 숨김 -->
+                </ul>
                 
-                <div class="about-main">
-                    <div class="about-left">
-                        <div class="sports-background">
-                            <h4>운동선수 출신 개발자의 강점</h4>
-                            <div class="sports-skills">
-                                <div class="sport-item">
-                                    <div class="sport-icon">💪</div>
-                                    <div class="sport-text">
-                                        <strong>체력과 지구력</strong>
-                                        <p>장시간 집중이 필요한 개발 업무에서도 꾸준한 성과를 낼 수 있습니다.</p>
-                                    </div>
-                                </div>
-                                <div class="sport-item">
-                                    <div class="sport-icon">🎯</div>
-                                    <div class="sport-text">
-                                        <strong>집중력과 정확성</strong>
-                                        <p>복잡한 문제 상황에서도 차분하게 분석하고 해결책을 찾아냅니다.</p>
-                                    </div>
-                                </div>
-                                <div class="sport-item">
-                                    <div class="sport-icon">🤝</div>
-                                    <div class="sport-text">
-                                        <strong>팀워크와 협업</strong>
-                                        <p>팀의 목표를 위해 개인의 역할을 충실히 수행하며 동료들과 원활히 소통합니다.</p>
-                                    </div>
-                                </div>
-                                <div class="sport-item">
-                                    <div class="sport-icon">🛡️</div>
-                                    <div class="sport-text">
-                                        <strong>압박 상황 대처</strong>
-                                        <p>긴급한 장애 상황이나 데드라인 압박에서도 침착하게 대응할 수 있습니다.</p>
-                                    </div>
-                                </div>
-                            </div>
+                <div class="auth-status">
+                    <!-- 로그아웃 상태 -->
+                    <div id="auth-logged-out" style="display: none;">
+                        <button class="btn btn-primary" onclick="login()">
+                            <i class="fab fa-github"></i>
+                            GitHub 로그인
+                        </button>
+                    </div>
+                    
+                    <!-- 로그인 상태 -->
+                    <div id="auth-logged-in" style="display: none;">
+                        <div class="auth-user">
+                            <i class="fas fa-user-circle"></i>
+                            <span id="user-name">사용자</span>
                         </div>
-                        
-                        <div class="skill-tree-section">
-                            <h4>Tech Stack</h4>
-                            <div class="skills">
-                                <div class="skill-item">
-                                    <i class="fab fa-java skill-icon"></i>
-                                    <span>Java</span>
-                                </div>
-                                <div class="skill-item">
-                                    <i class="fas fa-leaf skill-icon"></i>
-                                    <span>Spring Boot</span>
-                                </div>
-                                <div class="skill-item">
-                                    <i class="fas fa-fire skill-icon"></i>
-                                    <span>Redis</span>
-                                </div>
-                                <div class="skill-item">
-                                    <i class="fas fa-bolt skill-icon"></i>
-                                    <span>Kafka</span>
-                                </div>
-                                <div class="skill-item">
-                                    <i class="fas fa-database skill-icon"></i>
-                                    <span>Oracle</span>
-                                </div>
-                                <div class="skill-item">
-                                    <i class="fas fa-database skill-icon"></i>
-                                    <span>MySQL</span>
-                                </div>
-                                <div class="skill-item">
-                                    <i class="fab fa-aws skill-icon"></i>
-                                    <span>AWS</span>
-                                </div>
-                                <div class="skill-item">
-                                    <i class="fas fa-cloud skill-icon"></i>
-                                    <span>NCP</span>
-                                </div>
-                            </div>
+                        <button class="btn btn-secondary" onclick="logout()">
+                            <i class="fas fa-sign-out-alt"></i>
+                            로그아웃
+                        </button>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- 사이드바 -->
+        <aside class="blog-sidebar">
+            <!-- 프로필 섹션 -->
+            <div class="sidebar-section">
+                <div class="blog-profile">
+                    <div class="profile-avatar">
+                        <i class="fas fa-code-branch"></i>
+                    </div>
+                    <h2 class="profile-name">Zerofive Dev Blog</h2>
+                    <p class="profile-description">기술과 경험을 공유하는 개발자 블로그</p>
+                </div>
+            </div>
+
+            <!-- 포트폴리오 바로가기 버튼 (새로 추가) -->
+            <div class="sidebar-section">
+                <a href="/portfolio.html" class="btn btn-secondary sidebar-portfolio-btn">
+                    <i class="fas fa-address-card"></i>
+                    <span>Portfolio</span>
+                </a>
+            </div>
+
+            <!-- 통계 -->
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">
+                    <i class="fas fa-chart-bar"></i>
+                    블로그 통계
+                </h3>
+                <div class="blog-stats">
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="stat-content">
+                            <span class="stat-number" id="total-posts">0</span>
+                            <span class="stat-label">게시글</span>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-folder"></i>
+                        </div>
+                        <div class="stat-content">
+                            <span class="stat-number" id="total-categories">0</span>
+                            <span class="stat-label">카테고리</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 카테고리 -->
+            <div class="sidebar-section">
+                <h3 class="sidebar-title">
+                    <i class="fas fa-tags"></i>
+                    카테고리
+                </h3>
+                <div class="categories-list" id="categories-list">
+                    <!-- "All" 카테고리 항목을 JavaScript에서 동적으로 생성하므로 여기서는 제거합니다. -->
+                </div>
+            </div>
+
+            <!-- 관리 도구 (관리자만) -->
+            <div class="sidebar-section" id="admin-tools" style="display: none;">
+                <h3 class="sidebar-title">
+                    <i class="fas fa-tools"></i>
+                    관리 도구
+                </h3>
+                <div class="admin-actions">
+                    <button class="btn btn-primary" onclick="showWriteModal()">
+                        <i class="fas fa-plus"></i>
+                        새 게시글
+                    </button>
+                    <button class="btn btn-secondary" onclick="showCategoryModal()">
+                        <i class="fas fa-tags"></i>
+                        카테고리 관리
+                    </button>
+                </div>
+            </div>
+        </aside>
+
+        <!-- 메인 콘텐츠 -->
+        <main class="blog-main">
+            <div class="main-content">
+                <!-- 콘텐츠 툴바 -->
+                <div class="content-toolbar">
+                    <h1 class="toolbar-title" id="toolbar-title">최신 게시글</h1>
+                    <div class="toolbar-actions">
+                        <!-- 검색 버튼 삭제 -->
+                        <!-- 
+                        <button class="btn btn-secondary" onclick="toggleSearch()" title="검색">
+                            <i class="fas fa-search"></i>
+                        </button>
+                         -->
+                    </div>
+                </div>
+
+                <!-- 초기 메인 화면 섹션 -->
+                <div class="main-welcome-section" id="main-welcome-section">
+                    <h2>Welcome to Zerofive Dev Blog!</h2>
+                    <p>기술과 경험을 공유하는 개발자 블로그입니다. 다양한 주제의 글들을 만나보세요.</p>
+                    <div class="welcome-actions">
+                        <button class="btn btn-primary" onclick="showAllPosts()"><i class="fas fa-list-alt"></i> 전체 게시글 보기</button>
+                    </div>
+
+                    <div class="social-cards-container">
+                        <h3 class="social-cards-title">Connect with Me</h3>
+                        <div class="social-card-row">
+                            <a href="https://github.com/NohYeongO" class="social-card" target="_blank">
+                                <i class="fab fa-github"></i>
+                                <span>GitHub</span>
+                                <p>소스 코드와 프로젝트를 확인하세요.</p>
+                            </a>
+                            <a href="mailto:duddhr999@gmail.com" class="social-card" target="_blank">
+                                <i class="fas fa-envelope"></i>
+                                <span>Email</span>
+                                <p>문의사항이나 제안이 있다면 메일 주세요.</p>
+                            </a>
+                             <a href="https://www.linkedin.com/in/your-linkedin-profile" class="social-card" target="_blank"> 
+                                <i class="fab fa-linkedin"></i>
+                                <span>LinkedIn</span>
+                                <p>네트워킹을 원하시면 방문해주세요.</p>
+                            </a>
+                        </div>
+                        <!-- 아래 social-card-row 전체를 삭제합니다. -->
+                        <!-- 
+                        <div class="social-card-row">
+                            <a href="https://instagram.com/your_instagram_id" class="social-card" target="_blank"> 
+                                <i class="fab fa-instagram"></i>
+                                <span>Instagram</span>
+                                <p>일상과 다양한 소식을 공유합니다.</p>
+                            </a>
+                        </div>
+                        -->
+                        <!-- 필요시 다른 소셜 링크 카드 추가 -->
+                        <!-- 예시:
+                        <div class="social-card-row">
+                            <a href="#" class="social-card" target="_blank">
+                                <i class="fab fa-twitter"></i>
+                                <span>Twitter</span>
+                                <p>최신 소식과 생각을 공유합니다.</p>
+                            </a>
+                            <a href="#" class="social-card" target="_blank">
+                                <i class="fas fa-blog"></i>
+                                <span>Tech Blog</span>
+                                <p>다른 기술 블로그도 운영하고 있습니다.</p>
+                            </a>
+                        </div>
+                        -->
+                    </div>
+                </div>
+
+                <!-- 게시글 그리드 (초기에는 숨김) -->
+                <div class="posts-grid" id="posts-container" style="display: none;">
+                    <!-- 게시글들이 여기에 동적으로 추가됩니다 -->
+                </div>
+
+                <!-- 페이지네이션 (초기에는 숨김) -->
+                <div class="pagination-container" id="pagination-container" style="display: none;">
+                    <button class="pagination-btn" id="prev-page" onclick="prevPage()">
+                        <i class="fas fa-chevron-left"></i>
+                        이전
+                    </button>
+                    <span class="page-info" id="page-info">Page 1 of 1</span>
+                    <button class="pagination-btn" id="next-page" onclick="nextPage()">
+                        다음
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- 게시글 작성/수정 모달 -->
+    <div id="write-modal" class="modal">
+        <div class="modal-content" style="width: 900px;">
+            <div class="modal-header">
+                <h2>새 포스트 작성</h2>
+                <button class="modal-close" onclick="closeWriteModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="post-form">
+                    <div class="form-group">
+                        <label class="form-label" for="post-title">제목 *</label>
+                        <input type="text" id="post-title" class="form-input" required maxlength="255">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="post-category">카테고리 *</label>
+                        <select id="post-category" class="form-select" required>
+                            <option value="">카테고리를 선택하세요</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label" for="post-content">내용 * (Markdown 지원)</label>
+                        <textarea id="post-content" class="form-textarea" required placeholder="마크다운으로 작성하세요..."></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="form-checkbox-wrapper">
+                            <input type="checkbox" id="post-published" class="form-checkbox" checked>
+                            <label class="form-label" for="post-published">게시글 발행</label>
                         </div>
                     </div>
                     
-                    <div class="about-right">
-                        <div class="about-stats">
-                            <div class="stat-item">
-                                <h4>☕</h4>
-                                <p>개발 연료<br><small>하루 3잔의 커피로 집중력 유지</small></p>
-                            </div>
-                            <div class="stat-item">
-                                <h4>🐛</h4>
-                                <p>문제 해결<br><small>버그를 찾아 해결하는 것을 즐김</small></p>
-                            </div>
-                            <div class="stat-item">
-                                <h4>⚡</h4>
-                                <p>성능 최적화<br><small>더 나은 사용자 경험을 위한 개선</small></p>
-                            </div>
-                        </div>
+                    <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 2rem;">
+                        <button type="button" class="btn btn-secondary" onclick="closeWriteModal()">취소</button>
+                        <button type="submit" class="btn btn-primary">저장</button>
                     </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Journey Section -->
-    <section id="journey" class="journey section-fullpage">
-        <div class="container">
-            <h2 class="section-title">Development Journey</h2>
-            <p class="section-subtitle">백엔드 개발자로 성장해온 과정을 소개합니다</p>
-            
-            <div class="journey-grid">
-                <div class="journey-item">
-                    <div class="journey-year">2023.12</div>
-                    <div class="journey-card">
-                        <div class="journey-icon">🎓</div>
-                        <h3>개발 교육 시작</h3>
-                        <p>KH정보교육원에서 풀스택 개발 과정을 시작했습니다. Java 기초부터 Spring Framework까지 체계적으로 학습하며 개발의 기초를 다졌습니다.</p>
-                    </div>
-                </div>
-
-                <div class="journey-item">
-                    <div class="journey-year">2024.06</div>
-                    <div class="journey-card">
-                        <div class="journey-icon">🏆</div>
-                        <h3>교육 과정 수료</h3>
-                        <p>6개월간의 집중 교육을 통해 Java, Spring Boot, 데이터베이스 등 백엔드 개발의 핵심 기술을 습득했습니다.</p>
-                    </div>
-                </div>
-
-                <div class="journey-item">
-                    <div class="journey-year">2024.07</div>
-                    <div class="journey-card">
-                        <div class="journey-icon">💼</div>
-                        <h3>개발자 커리어 시작</h3>
-                        <p>부팅 주식회사에 웹개발자로 입사하여 실무 개발자로서의 첫 걸음을 시작했습니다.</p>
-                    </div>
-                </div>
-
-                <div class="journey-item">
-                    <div class="journey-year">2024.07-2025.03</div>
-                    <div class="journey-card">
-                        <div class="journey-icon">🛠️</div>
-                        <h3>IMSOHIT 시스템 고도화</h3>
-                        <p>한국국제보건의료재단의 <a href="https://imsohit.kofih.org/uat/uia/actionMain.do" target="_blank" style="color: #667eea; text-decoration: none;">IMSOHIT 시스템</a> 고도화 프로젝트를 담당했습니다. 레거시 코드 리팩토링과 성능 최적화를 통해 시스템을 개선했습니다.</p>
-                    </div>
-                </div>
-
-                <div class="journey-item">
-                    <div class="journey-year">2024.09-11</div>
-                    <div class="journey-card">
-                        <div class="journey-icon">⚓</div>
-                        <h3>항해 플러스 백엔드 과정</h3>
-                        <p>실무와 병행하며 항해 플러스 백엔드 과정을 수료했습니다. 심화된 백엔드 지식과 실전 경험을 쌓았습니다.</p>
-                    </div>
-                </div>
-
-                <div class="journey-item">
-                    <div class="journey-year">2025.03-06</div>
-                    <div class="journey-card">
-                        <div class="journey-icon">🎯</div>
-                        <h3>F-Lab 멘토링</h3>
-                        <p>F-Lab에서 시니어 개발자의 1:1 멘토링을 받으며 코드 리뷰, 아키텍처 설계 등 전문성을 향상시켰습니다.</p>
-                    </div>
-                </div>
-
-                <div class="journey-item">
-                    <div class="journey-year">2025.03</div>
-                    <div class="journey-card">
-                        <div class="journey-icon">🏫</div>
-                        <h3>공주대학교 편입</h3>
-                        <p>더 체계적인 컴퓨터 전공 지식을 쌓기 위해 공주대학교 소프트웨어학과에 편입했습니다. 이론과 실무를 겸비한 개발자로 성장하고 있습니다.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="projects section-fullpage">
-        <div class="container">
-            <h2 class="section-title">Projects</h2>
-            <p class="section-subtitle">주요 개발 프로젝트와 성과를 소개합니다</p>
-            
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-content">
-                        <div class="project-period">2024.07 - 2025.01</div>
-                        <h3>IMSOHIT 시스템 고도화</h3>
-                        <p>
-                            한국국제보건의료재단의 보건의료 교육훈련 통합관리시스템 고도화 프로젝트입니다. 
-                            컨트롤러에 집중되어 있던 비즈니스 로직을 서비스 계층으로 분리하여 코드 구조를 개선했습니다. 
-                            레거시 시스템의 거의 모든 페이지를 새롭게 개발하며 성능과 유지보수성을 크게 향상시켰습니다.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Java</span>
-                            <span class="tech-tag">전자정부프레임워크</span>
-                            <span class="tech-tag">MyBatis</span>
-                            <span class="tech-tag">Oracle</span>
-                            <span class="tech-tag">JSP</span>
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">jQuery</span>
-                        </div>
-                        <div class="project-readme">
-                            <a href="https://imsohit.kofih.org/uat/uia/actionMain.do" class="readme-link" target="_blank">
-                                <i class="fas fa-globe"></i>
-                                실제 서비스 확인하기
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-content">
-                        <div class="project-period">2024.09 - 2024.11</div>
-                        <h3>E-Commerce 개인 프로젝트</h3>
-                        <p>
-                            상품조회, 주문 및 결제 등의 백엔드 서비스 개발을 중점으로 한 프로젝트입니다.
-                            동시성 제어 및 테스트코드 작성, 모니터링 시스템 구축 등을 진행하였고, 
-                            시스템의 안정성과 사용자 편의성에 어떤 기술이 적합할지 고민하며 프로젝트를 진행하였습니다. 
-                            최종 목표로는 프로젝트를 통한 백엔드 개발능력 향상을 위한 프로젝트입니다.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Java</span>
-                            <span class="tech-tag">Spring Boot</span>
-                            <span class="tech-tag">JPA</span>
-                            <span class="tech-tag">MySQL</span>
-                            <span class="tech-tag">Redis</span>
-                        </div>
-                        <div class="project-links-section">
-                            <a href="#" class="readme-link portfolio-detail" data-project="ecommerce">
-                                <i class="fas fa-book"></i>
-                                프로젝트 상세 설명 보기
-                            </a>
-                            <a href="https://github.com/NohYeongO/e-commerce" class="readme-link" target="_blank">
-                                <i class="fab fa-github"></i>
-                                GitHub 링크 보기
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-content">
-                        <div class="project-period">2025.04 - 2025.06</div>
-                        <h3>Zariyo 콘서트 예약 시스템</h3>
-                        <p>
-                            대용량 트래픽을 고려한 콘서트 티켓 예약 시스템입니다. 
-                            이벤트 기반 설계와 클린 아키텍처를 기반으로, Redis를 활용한 대기열 시스템 구축 및 빠른 조회 성능을 고려한 캐싱을 통해 
-                            안정적이고 사용자 경험을 고려한 콘서트 예약 시스템을 목표로 개발했습니다.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Java</span>
-                            <span class="tech-tag">Spring Boot</span>
-                            <span class="tech-tag">JPA</span>
-                            <span class="tech-tag">MySQL</span>
-                            <span class="tech-tag">Redis</span>
-                            <span class="tech-tag">Kafka</span>
-                        </div>
-                        <div class="project-links-section">
-                            <a href="#" class="readme-link portfolio-detail" data-project="zariyo">
-                                <i class="fas fa-book"></i>
-                                프로젝트 상세 설명 보기
-                            </a>
-                            <a href="https://github.com/f-lab-edu/zariyo" class="readme-link" target="_blank">
-                                <i class="fab fa-github"></i>
-                                GitHub 링크 보기
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact section-fullpage">
-        <div class="container">
-            <h2 class="section-title">Contact</h2>
-            <p class="section-subtitle">언제든지 연락주세요</p>
-            
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>연락처 정보</h3>
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <span>nohyo05@naver.com</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <span>010-6632-8214</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>Seoul, Cheonan, South Korea</span>
-                    </div>
-                    <div class="contact-item">
-                        <i class="fas fa-coffee"></i>
-                        <span>커피챗 환영합니다</span>
-                    </div>
-                </div>
-                
-                <div class="social-links">
-                    <h3>소셜 미디어</h3>
-                    <div class="social-buttons">
-                        <div class="contact-item" id="github-social" onclick="window.open('https://github.com/NohYeongO', '_blank')">
-                            <i class="fab fa-github"></i>
-                            <span>GitHub</span>
-                        </div>
-                        <div class="contact-item" id="linkedin-social" onclick="window.open('https://www.linkedin.com/in/%EC%98%81%EC%98%A4-%EB%85%B8-20965633b/', '_blank')">
-                            <i class="fab fa-linkedin"></i>
-                            <span>LinkedIn</span>
-                        </div>
-                        <div class="contact-item" id="instagram-social" onclick="window.open('https://www.instagram.com/zerofive_n/', '_blank')">
-                            <i class="fab fa-instagram"></i>
-                            <span>Instagram</span>
-                        </div>
-                        <div class="contact-item" id="email-social" onclick="window.open('mailto:nohyo05@naver.com', '_self')">
-                            <i class="fas fa-envelope"></i>
-                            <span>Email</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="fun-fact">
-                <p>함께 성장할 수 있는 기회를 기다리고 있습니다. 언제든 연락주세요.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2024 Backend Developer Portfolio. Made with ❤️ and lots of ☕</p>
-        </div>
-    </footer>
-
-    <!-- Portfolio Detail Modal -->
-    <div id="portfolioModal" class="modal">
-        <div class="modal-content">
-            <div id="modalContent">
-                <!-- 모달 내용이 여기에 동적으로 추가됩니다 -->
+                </form>
             </div>
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <!-- 게시글 상세 모달 -->
+    <div id="post-detail-modal" class="modal">
+        <div class="modal-content" style="width: 800px;">
+            <div class="modal-header">
+                <h2 id="post-detail-title">게시글 제목</h2>
+                <button class="modal-close" onclick="closePostDetail()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="post-meta" style="margin-bottom: 2rem;">
+                    <span id="post-detail-author"></span>
+                    <span id="post-detail-date"></span>
+                    <span id="post-detail-category"></span>
+                </div>
+                
+                <div id="post-detail-content" class="post-content"></div>
+                
+                <div style="display: flex; gap: 1rem; justify-content: flex-end; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--border-color);">
+                    <button id="edit-post-btn" class="btn btn-secondary" onclick="editPost()" style="display: none;">
+                        <i class="fas fa-edit"></i>
+                        수정
+                    </button>
+                    <button id="delete-post-btn" class="btn btn-secondary" onclick="deletePost()" style="display: none;">
+                        <i class="fas fa-trash"></i>
+                        삭제
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 카테고리 관리 모달 -->
+    <div id="category-modal" class="modal">
+        <div class="modal-content" style="width: 500px;">
+            <div class="modal-header">
+                <h2>카테고리 관리</h2>
+                <button class="modal-close" onclick="closeCategoryModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">새 카테고리 추가</label>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <input type="text" id="new-category-name" class="form-input" placeholder="카테고리 이름">
+                        <button class="btn btn-primary" onclick="createCategory()">
+                            <i class="fas fa-plus"></i>
+                            추가
+                        </button>
+                    </div>
+                </div>
+                
+                <div style="margin-top: 2rem;">
+                    <h3 style="color: var(--text-primary); margin-bottom: 1rem;">기존 카테고리</h3>
+                    <div id="categories-management-list">
+                        <!-- 카테고리 목록이 여기에 동적으로 추가됩니다 -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/autoloader/prism-autoloader.min.js"></script>
+    
+    <script src="js/blog-script.js"></script>
 </body>
 </html> 
