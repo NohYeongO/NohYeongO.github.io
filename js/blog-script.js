@@ -197,44 +197,124 @@ function showUnauthenticatedState() {
 
 // GitHub 로그인
 function login() {
-    // 서버에서 자동으로 success.html 또는 error.html로 리다이렉트
-    const successUrl = `${window.location.origin}/login/success.html`;
-    
-    window.location.href = `${API_BASE_URL}/oauth2/authorization/github?redirect_uri=${encodeURIComponent(successUrl)}`;
+    try {
+        // 로그인 시도 정보 저장
+        sessionStorage.setItem('loginAttempt', JSON.stringify({
+            timestamp: new Date().getTime(),
+            redirectUrl: window.location.href
+        }));
+        
+        // 서버에서 자동으로 success.html 또는 error.html로 리다이렉트
+        const successUrl = `${window.location.origin}/login/success.html`;
+        const errorUrl = `${window.location.origin}/api/auth/login-error.html`;
+        
+        // OAuth URL 생성 시 에러 URL도 포함
+        const oauthUrl = `${API_BASE_URL}/oauth2/authorization/github?redirect_uri=${encodeURIComponent(successUrl)}&error_uri=${encodeURIComponent(errorUrl)}`;
+        
+        // 로그인 버튼 비활성화 및 로딩 상태 표시
+        const loginBtn = document.querySelector('button[onclick="login()"]');
+        if (loginBtn) {
+            loginBtn.disabled = true;
+            loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> GitHub 연결 중...';
+            
+            // 10초 후 버튼 복구 (타임아웃 대비)
+            setTimeout(() => {
+                loginBtn.disabled = false;
+                loginBtn.innerHTML = '<i class="fab fa-github"></i> GitHub 로그인';
+            }, 10000);
+        }
+        
+        // GitHub OAuth 페이지로 이동
+        window.location.href = oauthUrl;
+        
+    } catch (error) {
+        console.error('Login initiation failed:', error);
+        showError('로그인을 시작할 수 없습니다. 페이지를 새로고침 후 다시 시도해주세요.');
+        
+        // 버튼 복구
+        const loginBtn = document.querySelector('button[onclick="login()"]');
+        if (loginBtn) {
+            loginBtn.disabled = false;
+            loginBtn.innerHTML = '<i class="fab fa-github"></i> GitHub 로그인';
+        }
+    }
 }
 
 // 로그아웃
 async function logout() {
     try {
-        const response = await fetch(`${API_BASE_URL}/logout`, {
-            method: 'POST',
-            credentials: 'include'
-        });
+        // 즉시 클라이언트 정리 작업 시작 (서버 응답 기다리지 않음)
+        console.log('로그아웃 시작 - 클라이언트 정리 작업 수행');
         
+        // 1. 즉시 UI 상태 변경
         currentUser = null;
         isAuthenticated = false;
-        saveUserToSessionStorage(); 
-        showUnauthenticatedState(); 
+        showUnauthenticatedState();
         
-        if (response.ok) {
-            showSuccess('로그아웃되었습니다.');
-        }  else {
-            showError('로그아웃 중 서버에 오류가 발생했습니다. 클라이언트 세션은 초기화되었습니다.');
-        }
+        // 2. 모든 쿠키 삭제
+        document.cookie.split(";").forEach(function(c) { 
+            document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); 
+        });
         
+        // 도메인별 쿠키도 삭제
+        const domains = [window.location.hostname, `.${window.location.hostname}`];
+        domains.forEach(domain => {
+            document.cookie.split(";").forEach(function(c) { 
+                document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/;domain=" + domain); 
+            });
+        });
+        
+        // 3. 모든 스토리지 정리
+        sessionStorage.clear();
+        localStorage.clear();
+        
+        // 4. 추가 인증 정보 정리
+        saveUserToSessionStorage(); // null 값으로 정리
+        
+        // 5. 화면 상태 초기화
         currentCategory = 'all'; 
         currentPage = 0; 
         showWelcomeScreen(); 
-        updateToolbarTitle('welcome'); 
-
+        updateToolbarTitle('welcome');
+        
+        // 6. 즉시 성공 메시지 표시
+        showSuccess('로그아웃이 완료되었습니다.');
+        
+        // 7. 서버에 로그아웃 요청 (백그라운드에서 처리, 응답 무시)
+        fetch(`${API_BASE_URL}/logout`, {
+            method: 'POST',
+            credentials: 'include'
+        }).then(response => {
+            console.log('서버 로그아웃 요청 완료:', response.status);
+        }).catch(error => {
+            console.log('서버 로그아웃 요청 실패 (무시됨):', error);
+        });
+        
+        console.log('클라이언트 로그아웃 처리 완료');
+        
     } catch (error) {
+        // 오류가 발생해도 강제로 로그아웃 처리
+        console.error('로그아웃 중 오류 발생, 강제 정리:', error);
+        
         currentUser = null;
         isAuthenticated = false;
-        saveUserToSessionStorage();
         showUnauthenticatedState();
-        showError('로그아웃 중 오류가 발생했습니다. 클라이언트 세션은 초기화되었습니다.');
+        
+        // 강제 정리
+        try {
+            sessionStorage.clear();
+            localStorage.clear();
+            document.cookie.split(";").forEach(function(c) { 
+                document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/"); 
+            });
+        } catch (cleanupError) {
+            console.error('강제 정리 중 오류:', cleanupError);
+        }
+        
+        saveUserToSessionStorage();
         showWelcomeScreen(); 
         updateToolbarTitle('welcome');
+        showSuccess('로그아웃이 완료되었습니다.');
     }
 }
 
