@@ -1567,7 +1567,6 @@ body {
     position: relative;
 }
 
-/* 빈 게시글 상태 첫 게시글 작성 버튼 스타일 */
 .empty-state-btn {
     margin-top: 1.5rem;
     padding: 0.75rem 1.5rem;
