@@ -4,21 +4,17 @@ const navMenu = document.querySelector('.nav-menu');
 const navLinks = document.querySelectorAll('.nav-link');
 const navbar = document.querySelector('.navbar');
 
-// Loading Screen - Ensure all animations complete
 setTimeout(() => {
     const loading = document.getElementById('loading');
     if (loading) {
-        // CSS animation 'loadingFadeOut' (3s) handles the fade out.
-        // We just need to hide it after the animation is complete.
         setTimeout(() => {
-            if (loading) { // Ensure loading element still exists
+            if (loading) {
                 loading.style.display = 'none';
             }
-        }, 3000); // Match CSS animation duration
+        }, 3000);
     }
-}, 0); // Start immediately, CSS animation controls visibility
+}, 0);
 
-// Easter Egg - Konami Code
 let konamiCode = [];
 const konamiSequence = [
     'ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown',
@@ -26,12 +22,10 @@ const konamiSequence = [
     'KeyB', 'KeyA'
 ];
 
-// Mobile Navigation Toggle
 hamburger.addEventListener('click', () => {
     hamburger.classList.toggle('active');
     navMenu.classList.toggle('active');
     
-    // Animate hamburger bars
     const bars = hamburger.querySelectorAll('.bar');
     if (hamburger.classList.contains('active')) {
         bars[0].style.transform = 'rotate(-45deg) translate(-5px, 6px)';
@@ -44,13 +38,11 @@ hamburger.addEventListener('click', () => {
     }
 });
 
-// Close mobile menu when clicking on a link
 navLinks.forEach(link => {
     link.addEventListener('click', () => {
         hamburger.classList.remove('active');
         navMenu.classList.remove('active');
         
-        // Reset hamburger bars
         const bars = hamburger.querySelectorAll('.bar');
         bars[0].style.transform = 'none';
         bars[1].style.opacity = '1';
@@ -58,13 +50,11 @@ navLinks.forEach(link => {
     });
 });
 
-// Close mobile menu when clicking outside
 document.addEventListener('click', (e) => {
     if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
         hamburger.classList.remove('active');
         navMenu.classList.remove('active');
         
-        // Reset hamburger bars
         const bars = hamburger.querySelectorAll('.bar');
         bars[0].style.transform = 'none';
         bars[1].style.opacity = '1';
@@ -72,12 +62,16 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// Smooth scrolling for navigation links
 navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
+        const targetId = link.getAttribute('href');
+        
+        if (targetId.startsWith('http://') || targetId.startsWith('https://')) {
+            return;
+        }
+        
         e.preventDefault();
         
-        const targetId = link.getAttribute('href');
         const targetSection = document.querySelector(targetId);
         
         if (targetSection) {
@@ -92,7 +86,6 @@ navLinks.forEach(link => {
     });
 });
 
-// Navbar scroll effect
 window.addEventListener('scroll', () => {
     const navbar = document.querySelector('.navbar');
     if (window.scrollY > 50) {
@@ -108,9 +101,7 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// IDE Button Click Effects
 document.addEventListener('DOMContentLoaded', () => {
-    // IDE Control Buttons
     const ideButtons = document.querySelectorAll('.ide-button');
     ideButtons.forEach(button => {
         button.addEventListener('click', () => {
@@ -121,7 +112,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Toolbar Icons
     const toolbarIcons = document.querySelectorAll('.toolbar-icon');
     toolbarIcons.forEach(icon => {
         icon.addEventListener('click', () => {
@@ -130,7 +120,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 icon.style.transform = 'scale(1)';
             }, 200);
             
-            // Special effects for specific icons
             if (icon.classList.contains('run')) {
                 showNotification('코드 실행 중...', 'success');
             } else if (icon.classList.contains('debug')) {
@@ -141,7 +130,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // File Tab Close Button
     const tabClose = document.querySelector('.tab-close');
     if (tabClose) {
         tabClose.addEventListener('click', (e) => {
@@ -151,9 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Keyboard Navigation
 document.addEventListener('keydown', (e) => {
-    // Konami Code detection
     konamiCode.push(e.code);
     
     if (konamiCode.length > konamiSequence.length) {
@@ -161,7 +147,6 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// Utility Functions
 function isElementInViewport(el) {
     const rect = el.getBoundingClientRect();
     return (
@@ -173,18 +158,15 @@ function isElementInViewport(el) {
 }
 
 function showNotification(message, type = 'info') {
-    // Remove existing notification
     const existingNotification = document.querySelector('.notification');
     if (existingNotification) {
         existingNotification.remove();
     }
 
-    // Create notification element
     const notification = document.createElement('div');
     notification.className = `notification notification-${type}`;
     notification.textContent = message;
     
-    // Style the notification
     notification.style.cssText = `
         position: fixed;
         top: 90px;
@@ -202,13 +184,11 @@ function showNotification(message, type = 'info') {
     `;
     
     document.body.appendChild(notification);
-    
-    // Animate in
+
     setTimeout(() => {
         notification.style.transform = 'translateX(0)';
     }, 100);
     
-    // Remove after 3 seconds
     setTimeout(() => {
         notification.style.transform = 'translateX(100%)';
         setTimeout(() => {
@@ -219,7 +199,6 @@ function showNotification(message, type = 'info') {
     }, 3000);
 }
 
-// Intersection Observer for animations
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
@@ -234,7 +213,6 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe elements for animation
 document.addEventListener('DOMContentLoaded', () => {
     const animateElements = document.querySelectorAll('.project-card, .journey-card, .sport-item, .skill-item, .stat-item');
     
@@ -246,7 +224,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// 연속 타이핑 애니메이션 시스템
 class ContinuousTypingAnimation {
     constructor(element, cursorElement) {
         this.element = element;
@@ -254,7 +231,6 @@ class ContinuousTypingAnimation {
         this.isRunning = false;
         this.currentStep = 0;
         
-        // 애니메이션 시퀀스 정의
         this.sequence = [
             {
                 type: 'type',
@@ -319,7 +295,6 @@ class ContinuousTypingAnimation {
         
         const step = this.sequence[this.currentStep];
         if (!step) {
-            // 시퀀스 완료, 처음부터 다시 시작
             this.currentStep = 0;
             setTimeout(() => this.executeStep(), 500);
             return;
@@ -347,7 +322,6 @@ class ContinuousTypingAnimation {
         span.className = className;
         this.element.appendChild(span);
         
-        // 타이핑 효과 추가
         this.element.classList.add('typing');
         
         const typeChar = () => {
@@ -356,14 +330,12 @@ class ContinuousTypingAnimation {
             if (i < text.length) {
                 span.textContent += text.charAt(i);
                 i++;
-                setTimeout(typeChar, speed + Math.random() * 30); // 자연스러운 속도 변화
+                setTimeout(typeChar, speed + Math.random() * 30);
             } else {
-                // 타이핑 완료
                 this.element.classList.remove('typing');
                 this.nextStep();
             }
         };
-        
         typeChar();
     }
     
@@ -386,14 +358,12 @@ class ContinuousTypingAnimation {
         const allText = this.element.textContent;
         let currentLength = allText.length;
         
-        // 지우기 효과 추가
         this.element.classList.add('typing');
         
         const eraseChar = () => {
             if (!this.isRunning) return;
             
             if (currentLength > 0) {
-                // 마지막 문자 제거
                 const spans = this.element.querySelectorAll('span');
                 const lastSpan = spans[spans.length - 1];
                 
@@ -402,8 +372,6 @@ class ContinuousTypingAnimation {
                 } else if (lastSpan && lastSpan.textContent.length === 0) {
                     lastSpan.remove();
                 }
-                
-                // br 태그도 제거
                 const brs = this.element.querySelectorAll('br');
                 if (brs.length > 0 && Math.random() > 0.7) {
                     brs[brs.length - 1].remove();
@@ -412,7 +380,6 @@ class ContinuousTypingAnimation {
                 currentLength--;
                 setTimeout(eraseChar, speed + Math.random() * 20);
             } else {
-                // 모든 내용 완전 삭제
                 this.element.innerHTML = '';
                 this.element.classList.remove('typing');
                 this.nextStep();
@@ -428,12 +395,9 @@ class ContinuousTypingAnimation {
     }
 }
 
-// 기존 타이핑 관련 함수들 제거하고 새로운 시스템으로 교체
 let typingAnimation = null;
 
-// 페이지 로드 시 연속 타이핑 애니메이션 시작
 document.addEventListener('DOMContentLoaded', () => {
-    // 로딩 화면이 끝난 후 타이핑 애니메이션 시작
     setTimeout(() => {
         const typingDisplay = document.getElementById('typing-display');
         const cursor = document.querySelector('.typing-cursor');
@@ -442,10 +406,9 @@ document.addEventListener('DOMContentLoaded', () => {
             typingAnimation = new ContinuousTypingAnimation(typingDisplay, cursor);
             typingAnimation.start();
         }
-    }, 2500); // 로딩 화면이 끝나고 0.5초 후 시작
+    }, 2500);
 });
 
-// Dynamic skill progress animation
 function animateSkills() {
     const skillItems = document.querySelectorAll('.skill-item');
     skillItems.forEach((item, index) => {
@@ -458,7 +421,6 @@ function animateSkills() {
     });
 }
 
-// Sports items animation
 function animateSportsItems() {
     const sportItems = document.querySelectorAll('.sport-item');
     sportItems.forEach((item, index) => {
@@ -471,7 +433,6 @@ function animateSportsItems() {
     });
 }
 
-// Trigger animations when about section is visible
 const aboutSection = document.querySelector('.about');
 if (aboutSection) {
     const aboutObserver = new IntersectionObserver((entries) => {
@@ -487,7 +448,6 @@ if (aboutSection) {
     aboutObserver.observe(aboutSection);
 }
 
-// Project card hover effects
 const projectCards = document.querySelectorAll('.project-card');
 projectCards.forEach(card => {
     card.addEventListener('mouseenter', () => {
@@ -499,11 +459,9 @@ projectCards.forEach(card => {
     });
 });
 
-// Social button click effects
 const socialButtons = document.querySelectorAll('.social-btn');
 socialButtons.forEach(btn => {
     btn.addEventListener('click', (e) => {
-        // Create ripple effect
         const ripple = document.createElement('span');
         const rect = btn.getBoundingClientRect();
         const size = Math.max(rect.width, rect.height);
@@ -523,7 +481,6 @@ socialButtons.forEach(btn => {
     });
 });
 
-// Add ripple effect CSS
 const rippleStyle = document.createElement('style');
 rippleStyle.textContent = `
     .social-btn {
@@ -549,7 +506,6 @@ rippleStyle.textContent = `
 `;
 document.head.appendChild(rippleStyle);
 
-// Email copy functionality
 function copyEmail() {
     const email = 'your.email@example.com';
     navigator.clipboard.writeText(email).then(() => {
@@ -565,7 +521,6 @@ function copyEmail() {
     });
 }
 
-// Add click event to email button
 document.addEventListener('DOMContentLoaded', () => {
     const emailBtn = document.querySelector('.social-btn.email');
     if (emailBtn) {
@@ -576,14 +531,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-// Resize handler for responsive adjustments
 window.addEventListener('resize', () => {
-    // Close mobile menu on resize
     if (window.innerWidth > 768) {
         hamburger.classList.remove('active');
         navMenu.classList.remove('active');
         
-        // Reset hamburger bars
         const bars = hamburger.querySelectorAll('.bar');
         bars[0].style.transform = 'none';
         bars[1].style.opacity = '1';
@@ -591,7 +543,6 @@ window.addEventListener('resize', () => {
     }
 });
 
-// Performance optimization - Throttle scroll events
 function throttle(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -604,9 +555,7 @@ function throttle(func, wait) {
     };
 }
 
-// Apply throttling to scroll events
 const throttledScrollHandler = throttle(() => {
-    // Navbar scroll effect
     const navbar = document.querySelector('.navbar');
     if (window.scrollY > 50) {
         navbar.style.background = 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #1e1e2e 100%)';
@@ -620,7 +569,6 @@ const throttledScrollHandler = throttle(() => {
         navbar.style.borderBottom = '1px solid rgba(102, 126, 234, 0.3)';
     }
     
-    // Active navigation link highlighting
     const sections = document.querySelectorAll('section[id]');
     const navbarHeight = document.querySelector('.navbar').offsetHeight;
     
@@ -640,11 +588,10 @@ const throttledScrollHandler = throttle(() => {
             }
         }
     });
-}, 16); // ~60fps
+}, 16);
 
 window.addEventListener('scroll', throttledScrollHandler);
 
-// Add CSS styles
 const style = document.createElement('style');
 style.textContent = `
     @keyframes rainbow {
@@ -771,7 +718,7 @@ const portfolioDetails = {
             <h3>2) HTTP Polling, 순번 계산 최적화 (O(1)) 구조 전환</h3>
             <p>두 번째 구현에서는 HTTP Polling을 통해 실시간 순번을 확인하는 기능으로 전환하고, 첫 번째 수정 작업에서 고민했던 문제들을 개선하는 데 집중했습니다.</p>
             
-            <p>서버에 주기적으로 입장시키는 방식에서 서버 확장이 늦어지거나 없을 경우 서버 다운 위험이 있다는 점을 고려하여, 서버가 감당할 수 있는 threshold를 설정하고 현재 웹사이트 이용자 수가 이 threshold를 넘으면 대기열을 만들고, 이용자가 나가는 수만큼 대기열에서 입장시키는 방식을 적용해 서버 다운 위험을 개선했습니다. 그리고, 서버 인스턴스를 늘려 확장할 경우 threshold 값을 변경하고 분산 환경에서도 동일하게 적용하기 위해 threshold 값을 Redis에 저장해 관리하도록 했습니다. 이 방식을 통해 서버를 확장할 때 Redis에서 threshold 값만 변경하면 모든 서버에 공통으로 적용할 수 있게 되었습니다.</p>
+            <p>서버에 주기적으로 입장시키는 방식에서 서버 확장이 늦어지거나 없을 경우 서버 다운 위험이 있다는 점을 고려하여, 서버가 감당할 수 있는 threshold를 설정하고 현재 웹사이트 이용자 수가 이 threshold를 넘으면 대기열을 만들고, 이용자가 나가는 수만큼 대기열에서 입장시키는 방식을 적용해 서버 다운 위험을 개선했습니다. 그리고, 서버 인스턴스를 늘려 확장할 경우 threshold 값을 Redis에 저장해 관리하도록 했습니다. 이 방식을 통해 서버를 확장할 때 Redis에서 threshold 값만 변경하면 모든 서버에 공통으로 적용할 수 있게 되었습니다.</p>
             
             <p>웹소켓 연결로 인한 커넥션 풀 문제와 코드 복잡성 증가에 비해 사용자 경험 향상이 크지 않다고 판단해, HTTP 폴링 방식으로 변경했습니다. 개인적인 경험상 웹사이트 대기열에서 실시간 순번 변화를 크게 신경 쓰지 않았기 때문에, 실시간성은 떨어지더라도 순번을 확인할 수 있다면 사용자 경험에 큰 문제가 없을 것이라고 생각했습니다.</p>
             
