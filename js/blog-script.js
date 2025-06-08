@@ -1,6 +1,6 @@
 // Blog Script - Dev Blog System
 // API Base URL - 배포 시 실제 서버 URL로 변경
-const API_BASE_URL = 'https://my-blog-server-bcbhawbtbpdza7fz.koreacentral-01.azurewebsites.net';
+const API_BASE_URL = 'https://my-blog-server-bcbhawbtbpdza7fz.koreasouth-01.azurewebsites.net/';
 
 // Global State
 let currentUser = null;
@@ -23,19 +23,19 @@ document.addEventListener('DOMContentLoaded', function() {
 // 세션 스토리지에서 사용자 정보 로드
 function loadUserFromSessionStorage() {
     try {
-        const storedUser = sessionStorage.getItem('currentUser');
+    const storedUser = sessionStorage.getItem('currentUser');
         const storedAuth = sessionStorage.getItem('isAuthenticated');
         
-        if (storedUser) {
+    if (storedUser) {
             const parsedUser = JSON.parse(storedUser);
             
             if (parsedUser && parsedUser.authenticated) {
                 currentUser = parsedUser;
-                isAuthenticated = true;
+            isAuthenticated = true;
                 return true;
-            } else {
+        } else {
                 currentUser = null;
-                isAuthenticated = false;
+            isAuthenticated = false;
                 // 잘못된 데이터 정리
                 sessionStorage.removeItem('currentUser');
                 sessionStorage.removeItem('isAuthenticated');
@@ -59,11 +59,11 @@ function loadUserFromSessionStorage() {
 // 사용자 정보를 세션 스토리지에 저장
 function saveUserToSessionStorage() {
     try {
-        if (currentUser && isAuthenticated) {
-            sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
+    if (currentUser && isAuthenticated) {
+        sessionStorage.setItem('currentUser', JSON.stringify(currentUser));
             sessionStorage.setItem('isAuthenticated', 'true');
-        } else {
-            sessionStorage.removeItem('currentUser');
+    } else {
+        sessionStorage.removeItem('currentUser');
             sessionStorage.removeItem('isAuthenticated');
         }
     } catch (error) {
@@ -251,8 +251,8 @@ function login() {
             redirectUrl: window.location.href
         }));
         
-        // 서버에서 자동으로 success.html 또는 error.html로 리다이렉트
-        const successUrl = `${window.location.origin}/login/success.html`;
+    // 서버에서 자동으로 success.html 또는 error.html로 리다이렉트
+    const successUrl = `${window.location.origin}/login/success.html`;
         const errorUrl = `${window.location.origin}/api/auth/login-error.html`;
         
         // OAuth URL 생성 시 에러 URL도 포함
@@ -294,7 +294,7 @@ async function logout() {
         // 1. 즉시 UI 상태 변경
         currentUser = null;
         isAuthenticated = false;
-        showUnauthenticatedState();
+        showUnauthenticatedState(); 
         
         // 2. 모든 쿠키 삭제
         document.cookie.split(";").forEach(function(c) { 
@@ -320,20 +320,11 @@ async function logout() {
         currentCategory = 'all'; 
         currentPage = 0; 
         showWelcomeScreen(); 
-        updateToolbarTitle('welcome');
-        
+        updateToolbarTitle('welcome'); 
+
         // 6. 즉시 성공 메시지 표시
         showSuccess('로그아웃이 완료되었습니다.');
         
-        // 7. 서버에 로그아웃 요청 (백그라운드에서 처리, 응답 무시)
-        fetch(`${API_BASE_URL}/logout`, {
-            method: 'POST',
-            credentials: 'include'
-        }).then(response => {
-            // 서버 응답 무시
-        }).catch(error => {
-            // 오류 무시
-        });
         
     } catch (error) {
         // 오류가 발생해도 강제로 로그아웃 처리

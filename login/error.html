@@ -250,7 +250,7 @@
             sessionStorage.clear();
             document.getElementById('session-status').className = 'cleanup-item success';
             document.getElementById('session-status').innerHTML = '📋 세션 스토리지 삭제 완료 ✓';
-            
+
             // 3. 로컬 스토리지 삭제
             await sleep(500);
             localStorage.clear();
@@ -312,7 +312,7 @@
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' || e.key === 'Escape') {
                 window.location.href = '../index.html?cleared=true';
-            }
+        }
         });
         
         document.addEventListener('click', (e) => {
