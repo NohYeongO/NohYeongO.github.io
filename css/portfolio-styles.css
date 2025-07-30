@@ -1401,6 +1401,8 @@ body {
     animation: journeyFadeIn 0.8s ease forwards;
     opacity: 0;
     transform: translateY(30px);
+    min-height: 200px;
+    width: 100%;
 }
 
 .journey-item:nth-child(1) { animation-delay: 0.1s; }
@@ -1446,6 +1448,9 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    min-height: 180px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .journey-card:hover {
@@ -2223,7 +2228,7 @@ body {
     }
     
     .journey-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: 1fr;
         gap: 1.5rem;
     }
     
@@ -2408,6 +2413,17 @@ body {
     .journey-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
+    }
+    
+    .journey-item {
+        width: 100%;
+        min-height: auto;
+    }
+    
+    .journey-card {
+        width: 100%;
+        min-height: 160px;
+        padding: 1.5rem;
     }
     
     .projects-grid {
