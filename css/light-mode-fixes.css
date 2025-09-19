@@ -1,0 +1,19 @@
+/* 라이트 모드에서 H3 제목이 안 보이는 문제 해결 */
+[data-theme="light"] .post-detail-content h3 {
+    color: #1e293b !important;
+    background: none !important;
+    -webkit-background-clip: initial !important;
+    -webkit-text-fill-color: initial !important;
+    background-clip: initial !important;
+}
+
+/* 라이트 모드에서 H4, H5, H6 제목 색상 */
+[data-theme="light"] .post-detail-content h4,
+[data-theme="light"] .post-detail-content h5,
+[data-theme="light"] .post-detail-content h6 {
+    color: #1e293b !important;
+    background: none !important;
+    -webkit-background-clip: initial !important;
+    -webkit-text-fill-color: initial !important;
+    background-clip: initial !important;
+}

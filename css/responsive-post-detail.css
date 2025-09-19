@@ -1,0 +1,105 @@
+/* 반응형 포스트 상세 페이지 스타일 */
+
+/* 태블릿 크기 (768px 이하) */
+@media (max-width: 768px) {
+    .post-detail {
+        max-width: 100% !important;
+        padding: 1.5rem 1rem !important;
+        margin: 0 !important;
+        border-radius: 0 !important;
+    }
+    
+    .post-detail-header {
+        margin-bottom: 2rem !important;
+        padding-bottom: 1.5rem !important;
+    }
+    
+    .post-detail-title {
+        font-size: 2.2rem !important;
+        margin: 1rem 0 !important;
+    }
+    
+    .post-detail-meta {
+        flex-direction: column !important;
+        gap: 0.8rem !important;
+        align-items: center !important;
+    }
+    
+    .post-detail-meta span {
+        padding: 0.4rem 0.8rem !important;
+        font-size: 0.9rem !important;
+    }
+    
+    .post-detail-content {
+        font-size: 1rem !important;
+        line-height: 1.7 !important;
+    }
+    
+    .post-detail-content h1 {
+        font-size: 1.8rem !important;
+        margin-top: 2rem !important;
+        margin-bottom: 1rem !important;
+    }
+    
+    .post-detail-content h2 {
+        font-size: 1.5rem !important;
+        margin-top: 1.5rem !important;
+        margin-bottom: 0.8rem !important;
+    }
+    
+    .post-detail-content h3 {
+        font-size: 1.3rem !important;
+        margin-top: 1.5rem !important;
+        margin-bottom: 0.8rem !important;
+    }
+    
+    .post-detail-content img {
+        margin: 1.5rem 0 !important;
+
+
+    }
+}
+
+/* 모바일 크기 (480px 이하) */
+@media (max-width: 480px) {
+    .post-detail {
+        padding: 1rem 0.8rem !important;
+    }
+    
+    .post-detail-title {
+        font-size: 1.8rem !important;
+        margin: 0.8rem 0 !important;
+    }
+    
+    .post-detail-header {
+        margin-bottom: 1.5rem !important;
+        padding-bottom: 1rem !important;
+    }
+    
+    .post-detail-content {
+        font-size: 0.95rem !important;
+        line-height: 1.6 !important;
+    }
+    
+    .post-detail-content h1 {
+        font-size: 1.5rem !important;
+        margin-top: 1.5rem !important;
+        margin-bottom: 0.8rem !important;
+    }
+    
+    .post-detail-content h2 {
+        font-size: 1.3rem !important;
+        margin-top: 1.2rem !important;
+        margin-bottom: 0.6rem !important;
+    }
+    
+    .post-detail-content h3 {
+        font-size: 1.1rem !important;
+        margin-top: 1.2rem !important;
+        margin-bottom: 0.6rem !important;
+    }
+    
+    .post-detail-content img {
+        margin: 1rem 0 !important;
+    }
+}

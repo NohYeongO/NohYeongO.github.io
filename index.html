@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZeroFive.blog - Developer Blog</title>
+    
+    <!-- Meta Tags -->
+    <meta name="description" content="ZeroFive.blog - 개발자 블로그입니다. 기술과 경험을 공유하는 공간입니다.">
+    <meta name="keywords" content="ZeroFive, 개발자, 블로그, 기술, 프로그래밍">
+    <meta name="author" content="NohYeongO">
+    <meta property="og:title" content="ZeroFive.blog - Developer Blog">
+    <meta property="og:description" content="ZeroFive.blog - 개발자 블로그입니다. 기술과 경험을 공유하는 공간입니다.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nohyeongo.github.io">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ZeroFive.blog - Developer Blog">
+    <meta name="twitter:description" content="ZeroFive.blog - 개발자 블로그입니다. 기술과 경험을 공유하는 공간입니다.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="assets/ico/zerofive_icon.ico">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/ico/zerofive_icon.ico">
+    <link rel="apple-touch-icon" href="assets/ico/zerofive_icon.ico">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/blog-styles.css">
+    <link rel="stylesheet" href="css/light-mode-fixes.css">
+    <link rel="stylesheet" href="css/responsive-post-detail.css">
+</head>
+<body>
+
+    <!-- 메인 컨테이너 -->
+    <div class="main-container">
+        <!-- 네비게이션 바 -->
+        <nav class="navbar">
+            <div class="nav-brand">
+                <i class="fas fa-terminal"></i>
+                <span>ZEROFIVE.blog</span>
+            </div>
+            <div class="nav-links">
+                <a href="#home" class="nav-link active" data-section="home">
+                    <i class="fas fa-home"></i>
+                    <span>Home</span>
+                </a>
+                <a href="#blog" class="nav-link" data-section="blog">
+                    <i class="fas fa-blog"></i>
+                    <span>Blog</span>
+                </a>
+            </div>
+            <div class="nav-actions">
+                <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()">
+                    <i class="fas fa-moon" id="theme-icon"></i>
+                </button>
+            </div>
+            <div class="nav-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+
+        <!-- 메인 콘텐츠 -->
+        <main class="main-content">
+            <!-- 홈 섹션 -->
+            <section id="home-section" class="content-section active">
+                <div class="hero-container">
+                    <div class="hero-content">
+                        <div class="hero-text">
+                            <div class="brand-animation">
+                                <h1 class="brand-title" id="brand-title">ZEROFIVE</h1>
+                                <div class="brand-subtitle">Developer Blog</div>
+                            </div>
+                            <div class="hero-actions">
+                                <a href="#blog" class="btn btn-primary" onclick="showSection('blog')">
+                                    <i class="fas fa-blog"></i>
+                                    블로그 보기
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="social-links">
+                        <a href="https://github.com/NohYeongO" target="_blank" class="social-btn github-btn">
+                            <i class="fab fa-github"></i>
+                            <span>GitHub</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/%EC%98%81%EC%98%A4-%EB%85%B8-20965633b/" target="_blank" class="social-btn linkedin-btn">
+                            <i class="fab fa-linkedin"></i>
+                            <span>LinkedIn</span>
+                        </a>
+                        <a href="mailto:nohyo05@naver.com" class="social-btn mail-btn">
+                            <i class="fas fa-envelope"></i>
+                            <span>Mail</span>
+                        </a>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- 블로그 섹션 -->
+            <section id="blog-section" class="content-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <i class="fas fa-blog"></i>
+                        Blog
+                    </h2>
+                    <p class="section-subtitle">기술과 경험을 공유하는 공간</p>
+                </div>
+
+                <div class="blog-categories">
+                    <button class="category-tab active" data-category="devblog">
+                        <i class="fas fa-code"></i>
+                        Dev Blog
+                    </button>
+                    <button class="category-tab" data-category="lifeblog">
+                        <i class="fas fa-heart"></i>
+                        Life Blog
+                    </button>
+                </div>
+
+                <div class="blog-content">
+                    <div class="blog-posts" id="blog-posts">
+                        <!-- 블로그 포스트들이 여기에 동적으로 추가됩니다 -->
+                    </div>
+                </div>
+            </section>
+
+
+        </main>
+    </div>
+
+    <!-- 블로그 포스트 상세 모달 -->
+    <div id="post-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Post Title</h2>
+                <button class="modal-close" onclick="closePostModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="post-meta">
+                    <span id="modal-date"></span>
+                    <span id="modal-category"></span>
+                    <span id="modal-tags"></span>
+                </div>
+                <div id="modal-content" class="post-content"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Marked.js for markdown parsing -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@9.1.6/marked.min.js"></script>
+    <!-- Prism.js for code highlighting -->
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-core.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+    
+    <script src="js/blog-script.js"></script>
+</body>
+</html>
