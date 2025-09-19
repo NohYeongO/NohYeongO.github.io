@@ -1,0 +1,190 @@
+/* 이미지 크기 조절 및 블로그 상세글 레이아웃 조정 */
+
+/* 블로그 상세글 전체 크기를 75%로 축소 */
+.post-detail {
+    max-width: 900px !important; /* 1200px → 900px (75%) */
+    padding: 2rem 1.5rem !important; /* 3rem 2rem → 2rem 1.5rem */
+}
+
+/* 이미지 크기 조절 - 세로가 긴 이미지 */
+.post-detail-content img {
+    max-width: 100% !important;
+    max-height: 400px !important; /* 세로 높이 제한 */
+    width: auto !important;
+    height: auto !important;
+    object-fit: contain !important;
+    border-radius: 12px !important;
+    margin: 1.5rem auto !important;
+    box-shadow: var(--shadow-xl) !important;
+    display: block !important;
+}
+
+/* 가로가 긴 이미지의 경우 */
+.post-detail-content img[width] {
+    max-width: 100% !important;
+    max-height: 300px !important;
+    width: auto !important;
+    height: auto !important;
+}
+
+/* 세로가 긴 이미지의 경우 */
+.post-detail-content img[height] {
+    max-width: 100% !important;
+    max-height: 400px !important;
+    width: auto !important;
+    height: auto !important;
+}
+
+/* 블로그 상세글 제목 크기 조정 */
+.post-detail-title {
+    font-size: 2rem !important; /* 2.8rem → 2rem */
+    margin: 1rem 0 !important;
+}
+
+/* 블로그 상세글 콘텐츠 크기 조정 */
+.post-detail-content {
+    font-size: 0.95rem !important; /* 1.15rem → 0.95rem */
+    line-height: 1.6 !important; /* 1.9 → 1.6 */
+}
+
+/* 블로그 상세글 제목들 크기 조정 */
+.post-detail-content h1 {
+    font-size: 1.6rem !important; /* 2.2rem → 1.6rem */
+    margin-top: 1.5rem !important;
+    margin-bottom: 0.8rem !important;
+}
+
+.post-detail-content h2 {
+    font-size: 1.4rem !important; /* 1.9rem → 1.4rem */
+    margin-top: 1.2rem !important;
+    margin-bottom: 0.6rem !important;
+}
+
+.post-detail-content h3 {
+    font-size: 1.2rem !important; /* 1.6rem → 1.2rem */
+    margin-top: 1rem !important;
+    margin-bottom: 0.5rem !important;
+}
+
+.post-detail-content h4 {
+    font-size: 1.1rem !important;
+    margin-top: 0.8rem !important;
+    margin-bottom: 0.4rem !important;
+}
+
+.post-detail-content h5,
+.post-detail-content h6 {
+    font-size: 1rem !important;
+    margin-top: 0.6rem !important;
+    margin-bottom: 0.3rem !important;
+}
+
+/* 블로그 상세글 메타 정보 크기 조정 */
+.post-detail-meta {
+    font-size: 0.85rem !important; /* 1rem → 0.85rem */
+    gap: 1.2rem !important;
+    margin-top: 0.8rem !important;
+}
+
+.post-detail-meta span {
+    padding: 0.3rem 0.6rem !important;
+}
+
+/* 블로그 상세글 헤더 크기 조정 */
+.post-detail-header {
+    margin-bottom: 2rem !important; /* 3rem → 2rem */
+    padding-bottom: 1.2rem !important; /* 2rem → 1.2rem */
+}
+
+/* 코드 블록 크기 조정 */
+.post-detail-content pre {
+    padding: 1.5rem !important; /* 2rem → 1.5rem */
+    margin: 1.5rem 0 !important; /* 2rem → 1.5rem */
+    font-size: 0.85rem !important;
+}
+
+.post-detail-content code {
+    font-size: 0.8rem !important; /* 0.9rem → 0.8rem */
+    padding: 0.2rem 0.4rem !important;
+}
+
+/* 인용문 크기 조정 */
+.post-detail-content blockquote {
+    padding: 0.4rem 1.2rem !important;
+    margin: 1.2rem 0 !important;
+    font-size: 0.9rem !important;
+}
+
+/* 리스트 크기 조정 */
+.post-detail-content ul,
+.post-detail-content ol {
+    margin: 1.2rem 0 !important;
+    padding-left: 1.5rem !important;
+}
+
+.post-detail-content li {
+    margin-bottom: 0.6rem !important;
+    font-size: 0.95rem !important;
+}
+
+/* 테이블 크기 조정 */
+.post-detail-content table {
+    margin: 1.5rem 0 !important;
+    font-size: 0.9rem !important;
+}
+
+.post-detail-content th,
+.post-detail-content td {
+    padding: 0.8rem !important; /* 1rem → 0.8rem */
+}
+
+/* 반응형 조정 */
+@media (max-width: 768px) {
+    .post-detail {
+        max-width: 100% !important;
+        padding: 1.5rem 1rem !important;
+    }
+    
+    .post-detail-content img {
+        max-height: 300px !important;
+        margin: 1rem 0 !important;
+    }
+    
+    .post-detail-title {
+        font-size: 1.6rem !important;
+    }
+    
+    .post-detail-content {
+        font-size: 0.9rem !important;
+    }
+    
+    .post-detail-content h1 {
+        font-size: 1.4rem !important;
+    }
+    
+    .post-detail-content h2 {
+        font-size: 1.2rem !important;
+    }
+    
+    .post-detail-content h3 {
+        font-size: 1.1rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .post-detail {
+        padding: 1rem 0.8rem !important;
+    }
+    
+    .post-detail-content img {
+        max-height: 250px !important;
+    }
+    
+    .post-detail-title {
+        font-size: 1.4rem !important;
+    }
+    
+    .post-detail-content {
+        font-size: 0.85rem !important;
+    }
+}

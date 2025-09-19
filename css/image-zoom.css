@@ -1,0 +1,57 @@
+/* 간단한 이미지 확대/축소 기능 */
+
+/* 이미지 클릭 가능하도록 커서 변경 */
+.post-detail-content img {
+    cursor: pointer !important;
+    transition: transform 0.3s ease !important;
+    border-radius: 12px !important;
+    display: block !important;
+    margin: 0 auto !important;
+}
+
+.post-detail-content img:hover {
+    transform: scale(1.02) !important;
+}
+
+/* 확대된 이미지 스타일 */
+.post-detail-content img.scaled {
+    transform: scale(1.5) !important;
+    z-index: 1000 !important;
+    position: relative !important;
+    transition: transform 0.3s ease !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3) !important;
+    display: block !important;
+    margin: 0 auto !important;
+    transform-origin: center !important;
+}
+
+/* 반응형 조정 */
+@media (max-width: 768px) {
+    .post-detail-content img {
+        display: block !important;
+        margin: 0 auto !important;
+        text-align: center !important;
+    }
+    
+    .post-detail-content img.scaled {
+        transform: scale(1.8) !important;
+        display: block !important;
+        margin: 0 auto !important;
+        transform-origin: center !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .post-detail-content img {
+        display: block !important;
+        margin: 0 auto !important;
+        text-align: center !important;
+    }
+    
+    .post-detail-content img.scaled {
+        transform: scale(2.0) !important;
+        display: block !important;
+        margin: 0 auto !important;
+        transform-origin: center !important;
+    }
+}

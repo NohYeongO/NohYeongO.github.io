@@ -531,6 +531,13 @@ function showPostDirect(postId, category) {
         Prism.highlightElement(block);
     });
     
+    // 이미지 클릭 확대/축소 이벤트 추가
+    blogContent.querySelectorAll('img').forEach(img => {
+        img.addEventListener('click', function() {
+            toggleImageScale(this);
+        });
+    });
+    
     // 카테고리 탭 클릭 이벤트를 목록으로 돌아가기로 변경
     const categoryTabs = document.querySelectorAll('.category-tab');
     categoryTabs.forEach(tab => {
@@ -665,6 +672,28 @@ function formatDate(dateString) {
         day: 'numeric'
     });
 }
+
+// 이미지 확대/축소 토글
+function toggleImageScale(img) {
+    // 현재 확대 상태 확인
+    const isScaled = img.classList.contains('scaled');
+    
+    if (isScaled) {
+        // 축소 (원래 크기로)
+        img.classList.remove('scaled');
+        img.style.transform = 'scale(1)';
+        img.style.zIndex = 'auto';
+        img.style.position = 'relative';
+    } else {
+        // 확대
+        img.classList.add('scaled');
+        img.style.transform = 'scale(1.5)';
+        img.style.zIndex = '1000';
+        img.style.position = 'relative';
+        img.style.transition = 'transform 0.3s ease';
+    }
+}
+
 
 // 이벤트 리스너
 document.addEventListener('click', function(e) {
