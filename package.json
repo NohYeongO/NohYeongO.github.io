@@ -1,0 +1,22 @@
+{
+  "name": "zerofive-blog",
+  "version": "1.0.0",
+  "description": "ZeroFive Developer Blog",
+  "main": "convert-md.js",
+  "scripts": {
+    "convert": "node convert-md.js",
+    "build": "npm run convert",
+    "post": "npm run convert && git add posts/**/*.html && git commit -m 'build: convert markdown to HTML' && git push",
+    "deploy": "npm run build && git add . && git commit -m 'build: convert markdown to HTML' && git push"
+  },
+  "dependencies": {
+    "marked": "^9.1.6"
+  },
+  "keywords": [
+    "blog",
+    "markdown",
+    "static-site"
+  ],
+  "author": "NohYeongO",
+  "license": "MIT"
+}

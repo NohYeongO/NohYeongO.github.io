@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JVM 동작 방식과 구성 요소 정리 - ZeroFive Blog</title>
+    <meta name="description" content="JVM Study 내용을 공유합니다.">
+    <meta name="author" content="NohYeongO">
+    <meta name="keywords" content="ZeroFive, 개발자, 블로그, 기술, 프로그래밍">
+    <meta property="og:title" content="JVM 동작 방식과 구성 요소 정리 - ZeroFive Blog">
+    <meta property="og:description" content="JVM Study 내용을 공유합니다.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://nohyeongo.github.io/posts/devblog/jvm.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="JVM 동작 방식과 구성 요소 정리 - ZeroFive Blog">
+    <meta name="twitter:description" content="JVM Study 내용을 공유합니다.">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://nohyeongo.github.io/posts/devblog/jvm.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../assets/ico/zerofive_icon.ico">
+    <link rel="shortcut icon" href="../../assets/ico/zerofive_icon.ico">
+    <link rel="apple-touch-icon" href="../../assets/ico/zerofive_icon.ico">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Prism.js for code highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-dark.min.css" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+    <!-- Navigation Container -->
+    <div id="navbar-container"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Blog Section -->
+            <section class="blog-section">
+                <div class="blog-header">
+                    <div class="breadcrumb">
+                        <a href="../../index.html">Home</a>
+                        <span>/</span>
+                        <a href="../../blog/devblog.html">Dev Blog</a>
+                        <span>/</span>
+                        <span>JVM 동작 방식과 구성 요소 정리</span>
+                    </div>
+                </div>
+                
+                <!-- Post Detail -->
+                <div class="post-detail">
+                    <div class="post-detail-header">
+                        <h1 class="post-title">JVM 동작 방식과 구성 요소 정리</h1>
+                        <div class="post-detail-meta">
+                            <span><i class="fas fa-calendar"></i> 2025-09-23</span>
+                            <span><i class="fas fa-user"></i> NohYeongO</span>
+                            <span><i class="fas fa-tag"></i> 개발 블로그</span>
+                            <span><i class="fas fa-hashtag"></i> Java, JVM</span>
+                        </div>
+                    </div>
+                    <div class="post-detail-content">
+                        <blockquote>
+<p>Java 프로그램은 .java 소스 코드에서 시작해 .class 바이트코드로 변환되고,<br>이를 실행하는 주체가 바로 JVM(Java Virtual Machine) 입니다.<br>이번 글에서는 JVM의 구성 요소와 클래스 로딩 과정, 그리고 메모리 동작 방식을 정리해보겠습니다.</p>
+</blockquote>
+<h2>1. JVM의 주요 구성 요소</h2>
+<p><img src="../../assets/images/blog/devblog/jvm-architecture.jpeg" alt="JVM 아키텍처"><br><em>그림 1: JVM 전체 아키텍처</em></p>
+<ul>
+<li><strong>ClassLoader</strong>: 클래스를 로드하는 역할</li>
+<li><strong>Runtime Data Area</strong>: 실행 중 데이터를 저장하는 영역</li>
+<li><strong>Execution Engine</strong>: 바이트코드를 해석하거나 컴파일해 실제 기계어로 실행</li>
+<li><strong>Java Native Interface (JNI)</strong>: 네이티브 라이브러리(C/C++ 등)와 상호작용하는 인터페이스</li>
+</ul>
+<h2>2. Runtime Data Area</h2>
+<blockquote>
+<p>JVM이 실행될 때 만들어지는 메모리 구조는 공유 영역과 비공유 영역으로 나눌 수 있습니다.</p>
+</blockquote>
+<p><strong>(쓰레드 간 공유 영역)</strong></p>
+<ul>
+<li><strong>Method Area</strong>: 클래스의 메타데이터, static 변수, 상수 풀 저장<ul>
+<li>(Java 8 이후 HotSpot JVM에서는 Metaspace로 구현됨)</li>
+</ul>
+</li>
+<li><strong>Heap</strong>: new 키워드로 생성되는 객체 인스턴스 저장</li>
+</ul>
+<p><strong>(쓰레드 간 공유되지 않는 영역)</strong></p>
+<ul>
+<li><strong>JVM Stack</strong>: 각 메서드 호출마다 스택 프레임 생성 (지역 변수, 피연산자 스택, 리턴 주소 등 포함)</li>
+<li><strong>PC Register</strong>: 현재 실행 중인 명령어의 메모리 주소 저장</li>
+<li><strong>Native Stack</strong>: 네이티브 코드 실행을 위한 공간</li>
+</ul>
+<h2>3. Execution Engine</h2>
+<ul>
+<li><strong>Interpreter</strong>: 바이트코드를 한 줄씩 해석해 실행</li>
+<li><strong>JIT(Just-In-Time) Compiler</strong>: 자주 실행되는 바이트코드를 기계어로 변환하여 성능 향상</li>
+</ul>
+<h2>4. 클래스 로딩 과정</h2>
+<blockquote>
+<p>클래스 로딩은 다음과 같은 3단계로 진행됩니다. </p>
+</blockquote>
+<h3><strong>1️⃣ 로딩 (Loading)</strong></h3>
+<ul>
+<li><code>.class</code> 파일을 <strong>메모리에 로드</strong></li>
+<li><strong>상수 풀</strong>에서 기본 타입 리터럴 및 메서드 이름 등의 심볼 정보 저장</li>
+</ul>
+<h3><strong>2️⃣ 링킹 (Linking)</strong></h3>
+<ul>
+<li><strong>검증(Verification)</strong>: 바이트코드의 유효성 검사</li>
+<li><strong>준비(Preparation)</strong>: <code>static</code> 변수를 <strong>기본값으로 초기화</strong></li>
+<li><strong>해석(Resolution) - 중요!</strong><ul>
+<li><strong>클래스가 처음 메서드 영역(Method Area)에 로드될 때, 심볼 정보(symbolic references)는 메모리 영역에 임의의 값으로 저장됨</strong></li>
+<li><strong>이 심볼릭 레퍼런스를 실제 메모리 주소로 변환하는 과정이 해석(Resolution)</strong></li>
+<li><strong>JVM은 런타임에 동적 연결을 수행하여, 특정 클래스, 필드, 메서드 참조를 실제 메모리 주소로 바꿈</strong></li>
+<li><strong>특히 인터페이스 메서드 호출 시, 런타임에 동적 바인딩이 이루어짐</strong></li>
+<li><strong>예를 들어, <code>Method Area</code>에 로드될 때 <code>java.lang.String</code>의 <code>hashCode()</code>를 호출하면, 처음에는 심볼릭 참조(문자열 형태)였지만, 해석 후 실제 주소를 가리킴</strong></li>
+</ul>
+</li>
+</ul>
+<h3><strong>3️⃣ 초기화 (Initialization)</strong></h3>
+<ul>
+<li><code>static</code> 변수에 <strong>실제 값을 할당</strong></li>
+<li><code>static</code> 블록 및 메서드 실행</li>
+</ul>
+<h2>5. ClassLoader란?</h2>
+<ul>
+<li><strong>Bootstrap ClassLoader</strong>: 기본 Java API 클래스 로드</li>
+<li><strong>Extension (Platform) ClassLoader</strong>: <code>lib/ext</code>에 있는 확장 API 로드</li>
+<li><strong>Application (System) ClassLoader</strong>: 사용자 정의 클래스를 로드</li>
+</ul>
+<h3><strong>✔ 부모 위임 모델(Parent Delegation Model) - 중요!</strong></h3>
+<ul>
+<li><strong>클래스를 로드할 때, 최상위 Bootstrap ClassLoader부터 확인 후, 없으면 자식 ClassLoader가 로드</strong></li>
+<li><strong>즉, Application → Extension → Bootstrap 순서로 부모에게 요청하며, 부모가 처리하지 못하면 자식이 직접 로드</strong></li>
+<li><strong>이 방식의 장점</strong><ul>
+<li><strong>보안 강화</strong>: JDK 핵심 라이브러리(java.lang.String 등)의 재정의를 방지</li>
+<li><strong>일관성 유지</strong>: 동일한 클래스를 여러 번 로드하지 않음</li>
+</ul>
+</li>
+<li><strong>영향이 있을까?</strong><ul>
+<li><strong>보안 취약점</strong>: 만약 부모 위임을 깨고 Custom ClassLoader가 핵심 클래스를 재정의하면 보안 이슈 발생 가능</li>
+<li><strong>ClassLoader Leak 문제</strong>: 부모 위임 구조를 잘못 사용하면 GC에서 해제되지 않는 클래스가 남아 메모리 누수 발생 가능</li>
+<li><strong>JVM 튜닝 가능성</strong>: 일부 경우 성능 최적화를 위해 사용자 정의 ClassLoader를 사용하기도 함</li>
+</ul>
+</li>
+</ul>
+<h2>6. 클래스 로딩 및 메모리 동작 예제</h2>
+<pre><code class="language-java">class A {
+  private static final String STR = &quot;ABC&quot;; // &quot;ABC&quot;가 **상수 풀(Method Area)** 에 저장됨
+  private static Long l = Long.valueOf(-1L); // Heap에 저장됨
+  private static int i = -1; // Method Area (static 변수 영역)에 저장됨
+  private static C c = new C(); // Heap에 저장됨
+
+  private final String a = &quot;ABC&quot;;
+  private final int ii = 1;
+  private C cc = new C();
+
+  public static void main(String[] args) {
+    A a = new A(); // Heap에 객체 생성 (a, ii, cc 포함)
+    B b = new B(); // Heap에 객체 생성 (B가 A를 상속하여 포함)
+  }
+}
+
+class B extends A {
+  public static void main(String[] args) {
+    // 실행 코드
+  }
+}
+</code></pre>
+<p>✔ <strong>클래스 로딩 과정에서 발생하는 메모리 변화</strong>:</p>
+<ol>
+<li><strong>클래스로더가 <code>A.class</code>를 메서드 영역(Method Area)에 로드</strong></li>
+<li><code>static final</code> 상수(<code>&quot;ABC&quot;</code>)는 <strong>상수 풀(Constant Pool)에 저장</strong></li>
+<li><strong><code>static</code> 변수(<code>l</code>, <code>i</code>, <code>c</code>)는 Method Area에 저장</strong></li>
+<li><strong><code>new A()</code>를 호출하면 Heap에 객체가 생성됨</strong></li>
+<li><strong>A가 B로 확장되면, B도 Heap에 저장되며, A의 데이터도 포함됨</strong></li>
+</ol>
+<h3><strong>정리</strong></h3>
+<p>✔ <strong>JVM은 ClassLoader, Runtime Data Area, Execution Engine, JNI로 구성됨</strong><br>✔ <strong>Runtime Data Area는 공유 영역(Heap, Method Area)과 비공유 영역(Stack, PC Register, Native Stack)으로 나뉨</strong><br>✔ <strong>클래스 로딩 과정: 로딩 → 링킹 → 초기화 순서로 진행</strong><br>✔ <strong>링킹(해석) 과정에서 심볼릭 레퍼런스를 실제 주소로 변환</strong><br>✔ <strong>클래스 로더는 부모 위임 모델을 사용하여 보안 및 성능을 최적화</strong><br>✔ <strong>잘못된 ClassLoader 사용 시 메모리 누수 또는 보안 취약점이 발생할 수 있음</strong></p>
+
+                    </div>
+                    
+                    <!-- Comments Section -->
+                    <div class="comments-section">
+                        <div class="comments-container">
+                            <h3 class="comments-title">
+                                <i class="fas fa-comments"></i>
+                                댓글
+                            </h3>
+                            <div class="comments-wrapper">
+                                <div id="giscus-comments">
+                                    <script src="https://giscus.app/client.js"
+                                            data-repo="NohYeongO/NohYeongO.github.io"
+                                            data-repo-id="R_kgDOP1wrxA"
+                                            data-category="General"
+                                            data-category-id="DIC_kwDOP1wrxM4Cv1FJ"
+                                            data-mapping="pathname"
+                                            data-strict="1"
+                                            data-reactions-enabled="1"
+                                            data-emit-metadata="1"
+                                            data-input-position="top"
+                                            data-theme="preferred_color_scheme"
+                                            data-lang="ko"
+                                            data-loading="lazy"
+                                            crossorigin="anonymous"
+                                            async>
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer Container -->
+    <div id="footer-container"></div>
+    
+    <!-- Common Scripts -->
+    <script src="../../js/common.js"></script>
+</body>
+</html>

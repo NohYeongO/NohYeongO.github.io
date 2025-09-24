@@ -1,0 +1,48 @@
+name: Convert Markdown to HTML
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'posts/**/*.md'
+      - 'convert-md.js'
+      - 'package.json'
+  workflow_dispatch:
+
+jobs:
+  convert:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: npm install
+      
+    - name: Convert markdown to HTML
+      run: node convert-md.js
+      
+    - name: Check for changes
+      id: verify-changed-files
+      run: |
+        if [ -n "$(git status --porcelain)" ]; then
+          echo "changed=true" >> $GITHUB_OUTPUT
+        else
+          echo "changed=false" >> $GITHUB_OUTPUT
+        fi
+        
+    - name: Commit and push changes
+      if: steps.verify-changed-files.outputs.changed == 'true'
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add posts/**/*.html package-lock.json
+        git commit -m "build: auto-convert markdown to HTML [skip ci]"
+        git push
