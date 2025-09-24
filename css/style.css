@@ -1,3 +1,31 @@
+/* 즉시 다크모드 적용을 위한 기본 스타일 */
+html[data-theme="dark"] {
+    background-color: #0f172a !important;
+}
+
+html[data-theme="dark"] body {
+    background-color: #0f172a !important;
+    color: #f8fafc !important;
+}
+
+/* 다크모드 전환 시 깜빡임 방지를 위한 추가 스타일 */
+html[data-theme="dark"] .navbar {
+    background-color: #0f172a !important;
+    border-bottom-color: #334155 !important;
+}
+
+html[data-theme="dark"] .hero-section {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
+}
+
+html[data-theme="dark"] .contact-section {
+    background: linear-gradient(135deg, #1e293b 0%, #334155 100%) !important;
+}
+
+html[data-theme="dark"] .blog-section {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
+}
+
 /* CSS Variables for Theme Management */
 :root {
     /* Light Theme Colors */
@@ -85,7 +113,7 @@ body {
     line-height: 1.6;
     color: var(--text-primary);
     background-color: var(--bg-primary);
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.2s ease-out, color 0.2s ease-out;
 }
 
 /* Container */
@@ -105,7 +133,7 @@ body {
     border-bottom: 1px solid var(--border-color);
     backdrop-filter: blur(10px);
     z-index: 1000;
-    transition: all 0.3s ease;
+    transition: background-color 0.2s ease-out, border-color 0.2s ease-out;
 }
 
 .navbar-container {

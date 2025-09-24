@@ -13,7 +13,19 @@ class ThemeManager {
     }
 
     applyTheme() {
+        // 즉시 테마 속성 설정
         document.documentElement.setAttribute('data-theme', this.theme);
+        
+        // 다크모드일 때 즉시 배경색 설정 (깜빡임 방지)
+        if (this.theme === 'dark') {
+            document.documentElement.style.backgroundColor = '#0f172a';
+            document.body.style.backgroundColor = '#0f172a';
+            document.body.style.color = '#f8fafc';
+        } else {
+            document.documentElement.style.backgroundColor = '';
+            document.body.style.backgroundColor = '';
+            document.body.style.color = '';
+        }
         
         const themeToggle = document.getElementById('theme-toggle');
         if (themeToggle) {
@@ -27,9 +39,17 @@ class ThemeManager {
     }
 
     toggleTheme() {
+        // 부드러운 전환을 위해 잠시 transition을 비활성화
+        document.body.style.transition = 'none';
+        
         this.theme = this.theme === 'light' ? 'dark' : 'light';
         localStorage.setItem('theme', this.theme);
         this.applyTheme();
+        
+        // 다음 프레임에서 transition 다시 활성화
+        requestAnimationFrame(() => {
+            document.body.style.transition = '';
+        });
     }
 
     bindEvents() {
