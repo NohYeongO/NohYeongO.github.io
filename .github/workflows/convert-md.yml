@@ -9,6 +9,9 @@ on:
       - 'package.json'
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   convert:
     runs-on: ubuntu-latest
@@ -16,7 +19,9 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-      
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
@@ -24,11 +29,11 @@ jobs:
         cache: 'npm'
         
     - name: Install dependencies
-      run: npm install
-      
+      run: npm ci
+        
     - name: Convert markdown to HTML
-      run: node convert-md.js
-      
+      run: npm run convert
+        
     - name: Check for changes
       id: verify-changed-files
       run: |
@@ -43,6 +48,6 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add posts/**/*.html package-lock.json
-        git commit -m "build: auto-convert markdown to HTML [skip ci]"
+        git add .
+        git commit -m "🤖 자동 변환: 마크다운을 HTML로 변환 [skip ci]"
         git push
