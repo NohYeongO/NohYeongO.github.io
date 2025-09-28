@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Process 정리 - ZeroFive Blog</title>
+    <meta name="description" content="Process Study 내용을 공유합니다.">
+    <meta name="author" content="NohYeongO">
+    <meta name="keywords" content="ZeroFive, 개발자, 블로그, 기술, 프로그래밍">
+    <meta property="og:title" content="Process 정리 - ZeroFive Blog">
+    <meta property="og:description" content="Process Study 내용을 공유합니다.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://nohyeongo.github.io/posts/devblog/process.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Process 정리 - ZeroFive Blog">
+    <meta name="twitter:description" content="Process Study 내용을 공유합니다.">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://nohyeongo.github.io/posts/devblog/process.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../assets/ico/zerofive_icon.ico">
+    <link rel="shortcut icon" href="../../assets/ico/zerofive_icon.ico">
+    <link rel="apple-touch-icon" href="../../assets/ico/zerofive_icon.ico">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Prism.js for code highlighting -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-dark.min.css" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body>
+    <!-- Navigation Container -->
+    <div id="navbar-container"></div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Blog Section -->
+            <section class="blog-section">
+                <div class="blog-header">
+                    <div class="breadcrumb">
+                        <a href="../../index.html">Home</a>
+                        <span>/</span>
+                        <a href="../../blog/devblog.html">Dev Blog</a>
+                        <span>/</span>
+                        <span>Process 정리</span>
+                    </div>
+                </div>
+                
+                <!-- Post Detail -->
+                <div class="post-detail">
+                    <div class="post-detail-header">
+                        <h1 class="post-title">Process 정리</h1>
+                        <div class="post-detail-meta">
+                            <span><i class="fas fa-calendar"></i> 2025-09-28</span>
+                            <span><i class="fas fa-user"></i> NohYeongO</span>
+                            <span><i class="fas fa-tag"></i> 개발 블로그</span>
+                            <span><i class="fas fa-hashtag"></i> OS, Process</span>
+                        </div>
+                    </div>
+                    <div class="post-detail-content">
+                        <h2>운영체제 프로세스 정리</h2>
+<p>운영체제를 공부하다 보면 반드시 마주치는 주제가 있습니다. 바로 <strong>프로세스(Process)</strong> 입니다.<br>단순히 &quot;실행 중인 프로그램&quot;이라고만 외워두면 금방 잊어버리기 쉽죠.<br>그래서 이번 글에서는 프로세스를 조금 더 자세하게 오래 기억할 수 있도록,<br>메모리 구조부터 상태 전이까지 한 번에 정리해 보겠습니다.  </p>
+<h2>프로세스란?</h2>
+<p><strong>프로세스(Process)</strong> 는 <strong>메모리에서 실행 중인 프로그램</strong>을 의미합니다.<br>정적인 프로그램 파일이 실행되면 운영체제가 CPU와 메모리를 할당해주고,<br>이 순간 프로그램은 살아있는 프로세스로 변신합니다.  </p>
+<h2>프로세스 메모리 구조</h2>
+<p><img src="../../assets/images/blog/devblog/process-memory.png" alt="프로세스 메모리 구조"></p>
+<p>프로세스는 실행되면서 메모리 위에서 여러 영역으로 나뉘어 관리됩니다.<br>각 영역은 저마다의 역할이 있고, 이 덕분에 프로그램이 질서 있게 실행될 수 있죠.  </p>
+<ul>
+<li><strong>Code</strong>: 실행 가능한 명령어가 저장된 영역 (읽기 전용)  </li>
+<li><strong>Data</strong>: 전역 변수와 정적 변수가 저장  </li>
+<li><strong>Heap</strong>: 실행 도중 동적으로 할당되는 메모리  </li>
+<li><strong>Stack</strong>: 함수 호출, 지역 변수, 매개변수가 저장 (LIFO 구조)</li>
+</ul>
+<h2>프로세스 제어 블록 (PCB)</h2>
+<p>운영체제는 수많은 프로세스를 동시에 다루기 때문에,<br>각 프로세스를 관리할 &quot;이력서&quot; 같은 자료구조가 필요합니다.<br>이게 바로 <strong>PCB(Process Control Block)</strong> 입니다.  </p>
+<p>PCB에는 프로세스 ID, 현재 상태, CPU 레지스터 값, 메모리 정보, 파일·I/O 정보 등이 기록됩니다.  </p>
+<p>👉 중요한 점은, <strong>CPU 스케줄링</strong> 때문에 PCB가 꼭 필요하다는 겁니다.  </p>
+<ul>
+<li>어떤 프로세스가 실행 중일 때, 다른 프로세스가 CPU를 점유하면 현재 프로세스는 <strong>Ready 상태</strong>로 밀려납니다.  </li>
+<li>이때 운영체제는 <strong>PCB에 현재까지의 작업 내용(레지스터 값, 프로그램 카운터 등)을 저장</strong>합니다.  </li>
+<li>나중에 이 프로세스가 다시 CPU를 배정받으면, PCB 정보를 불러와 <strong>중단된 지점부터 실행을 이어갈 수 있습니다.</strong></li>
+</ul>
+<p>즉, PCB는 프로세스가 CPU를 뺏겼다가도 다시 이어서 실행할 수 있게 하는 <strong>“저장 포인트”</strong> 같은 역할을 합니다.  </p>
+<p>📌 <strong>추가 포인트</strong><br>PCB는 일반 메모리 영역이 아니라, <strong>커널 영역(Kernel Space)</strong> 에 위치합니다.<br>이는 보안과 안정성을 위해서입니다.</p>
+<p><img src="../../assets/images/blog/devblog/PCB.png" alt="PCB 구조"></p>
+<h3>PCB에 담기는 주요 정보</h3>
+<ul>
+<li><strong>포인터</strong>:  <ul>
+<li>보통은 <strong>다른 PCB들과 연결 리스트 형태로 묶기 위한 포인터</strong>를 의미하며,  </li>
+<li>동시에 <strong>컨텍스트 전환 시 스택 포인터를 저장</strong>하는 용도로 사용되기도 한다.</li>
+</ul>
+</li>
+<li><strong>프로세스 상태</strong>: Ready, Running, Waiting 등 현재 상태  </li>
+<li><strong>프로세스 번호(PID)</strong>: 프로세스를 구분하는 고유 식별자  </li>
+<li><strong>프로그램 카운터</strong>: 다음 실행할 명령어의 주소  </li>
+<li><strong>레지스터 정보</strong>: 실행 도중의 CPU 레지스터 값  </li>
+<li><strong>메모리 관리 정보</strong>: 프로세스의 메모리 위치 정보, 경계 레지스터 값</li>
+<li><strong>열린 파일 목록</strong>: 해당 프로세스가 열고 있는 파일과 입출력 리소스</li>
+</ul>
+<h2>프로세스 상태와 라이프사이클 🔄</h2>
+<p><img src="../../assets/images/blog/devblog/state-model.jpg" alt="프로세스 라이프사이클"></p>
+<p>프로세스는 태어나서 죽기까지 여러 단계를 거칩니다.<br>특히 <strong>5-State Model</strong>은 시험이나 면접에서 가장 자주 등장하니 꼭 기억해두세요.  </p>
+<ul>
+<li><strong>New</strong> → 이제 막 만들어진 상태</li>
+<li><strong>Ready</strong> → 실행할 준비가 끝났지만 CPU 할당을 기다리는 상태</li>
+<li><strong>Running</strong> → CPU를 차지하고 실제로 실행 중인 상태</li>
+<li><strong>Waiting(Blocked)</strong> → I/O 등 이벤트를 기다리는 상태</li>
+<li><strong>Terminated</strong> → 실행이 끝나고 종료된 상태</li>
+</ul>
+<p>👉 결국 이런 세밀한 상태 전이가 필요한 이유도 <strong>CPU 스케줄링</strong> 때문입니다.<br>한정된 CPU를 여러 프로세스가 효율적으로 나눠 쓰도록 운영체제가 관리하기 위해,<br>각 프로세스의 상태를 추적하고 전환하는 체계가 꼭 필요한 것이죠.</p>
+<h2>프로세스 생성과 종료</h2>
+<p>운영체제는 새로운 프로세스가 필요할 때 고유 PID를 부여하고, 메모리를 할당하며, PCB를 초기화합니다.<br>이 과정을 통해 프로세스는 <strong>New → Ready</strong> 상태로 전환되어 실행을 기다리게 됩니다.  </p>
+<h3>프로세스 생성 방식</h3>
+<ul>
+<li><p><strong>UNIX 계열</strong>  </p>
+<ul>
+<li><code>fork()</code> : 현재 실행 중인 <strong>부모 프로세스를 그대로 복제</strong>하여 자식 프로세스를 생성합니다.<br>(코드, 데이터, 힙, 스택 영역을 그대로 복사하되, PID는 새롭게 부여됨)  </li>
+<li><code>exec()</code> : 현재 프로세스를 완전히 새로운 프로그램으로 덮어씁니다.  </li>
+<li><code>wait()</code> : 부모 프로세스가 자식 프로세스의 종료를 기다릴 때 사용됩니다.</li>
+</ul>
+</li>
+<li><p><strong>Windows 계열</strong>  </p>
+<ul>
+<li><code>CreateProcess()</code> : 프로세스를 생성하면서 동시에 특정 프로그램을 실행합니다.<br>(UNIX의 <code>fork()</code> + <code>exec()</code> 기능을 합친 형태라고 볼 수 있습니다.)</li>
+</ul>
+</li>
+</ul>
+<p>👉 즉, <strong>부모 프로세스를 복제(fork) → 필요하면 새로운 프로그램으로 교체(exec)</strong> 라는 흐름을 기억하면 좋습니다.</p>
+<h3>프로세스 종료 방식</h3>
+<ul>
+<li><strong>정상 종료</strong>: 작업이 끝나고 <code>exit()</code> 시스템 호출로 종료  </li>
+<li><strong>비정상 종료</strong>: 오류나 예외로 <code>abort()</code> 호출  </li>
+<li><strong>부모 프로세스에 의한 종료</strong>: <code>kill()</code> 같은 명령으로 자식 프로세스를 강제 종료  </li>
+<li><strong>신호에 의한 종료</strong>: <code>SIGKILL</code>, <code>SIGSTOP</code> 등 외부 신호에 의해 종료</li>
+</ul>
+<p>프로세스가 종료되면 운영체제는 해당 프로세스에 할당된 <strong>메모리 공간을 해제</strong>하고,<br>PCB도 정리하여 시스템 자원이 회수됩니다.  </p>
+<p>⚠️ 단, <strong>UNIX 계열에서는 부모 프로세스가 자식의 종료 상태를 확인(<code>wait()</code>)하기 전까지 PCB 일부가 남아 있게 됩니다.</strong> 이런 상태를 <strong>좀비 프로세스(Zombie Process)</strong> 라고 부르며, 자식의 종료 정보를 부모가 수거해야 완전히 제거됩니다.  </p>
+<h2>마무리</h2>
+<p>정리해 보면, 프로세스는 단순한 실행 단위를 넘어</p>
+<ul>
+<li><strong>메모리 구조(Code, Data, Heap, Stack)</strong></li>
+<li><strong>PCB라는 관리 데이터</strong></li>
+<li><strong>상태(Ready, Running, Waiting…)</strong></li>
+</ul>
+<p>이 세 가지 관점에서 이해해야 완전히 그림이 잡힙니다.</p>
+<p>👉 오늘은 프로세스 자체에 집중했으니, <strong>다음 글에서는 스레드(Thread)</strong> 를 다루면서<br>“프로세스와 스레드의 차이가 무엇인지”를 이어서 살펴보겠습니다.</p>
+<h3>🚨 틀린부분이 있다면 댓글로 알려주세요 🙏🏻</h3>
+
+                    </div>
+                    
+                    <!-- Comments Section -->
+                    <div class="comments-section">
+                        <div class="comments-container">
+                            <h3 class="comments-title">
+                                <i class="fas fa-comments"></i>
+                                댓글
+                            </h3>
+                            <div class="comments-wrapper">
+                                <div id="giscus-comments">
+                                    <script src="https://giscus.app/client.js"
+                                            data-repo="NohYeongO/NohYeongO.github.io"
+                                            data-repo-id="R_kgDOP1wrxA"
+                                            data-category="General"
+                                            data-category-id="DIC_kwDOP1wrxM4Cv1FJ"
+                                            data-mapping="pathname"
+                                            data-strict="1"
+                                            data-reactions-enabled="1"
+                                            data-emit-metadata="1"
+                                            data-input-position="top"
+                                            data-theme="preferred_color_scheme"
+                                            data-lang="ko"
+                                            data-loading="lazy"
+                                            crossorigin="anonymous"
+                                            async>
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer Container -->
+    <div id="footer-container"></div>
+    
+    <!-- Common Scripts -->
+    <script src="../../js/common.js"></script>
+</body>
+</html>

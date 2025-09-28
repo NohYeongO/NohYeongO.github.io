@@ -32,22 +32,6 @@
     
     <!-- Styles -->
     <link rel="stylesheet" href="../css/style.css">
-    
-    <!-- Prevent Flash of Unstyled Content (FOUC) -->
-    <script>
-        // 즉시 테마를 적용하여 깜빡임 방지
-        (function() {
-            const theme = localStorage.getItem('theme') || 'light';
-            document.documentElement.setAttribute('data-theme', theme);
-            
-            // 다크모드일 때 즉시 배경색 설정
-            if (theme === 'dark') {
-                document.documentElement.style.backgroundColor = '#0f172a';
-                document.body.style.backgroundColor = '#0f172a';
-                document.body.style.color = '#f8fafc';
-            }
-        })();
-    </script>
 </head>
 <body>
     <!-- Navigation Container -->
@@ -81,6 +65,28 @@
                 </div>
                 
                 <div class="blog-posts">
+                    
+                        <article class="blog-post-card" onclick="window.location.href='../posts/devblog/process.html'">
+                            <div class="post-card-content">
+                                <h2 class="post-title">
+                                    Process 정리
+                                </h2>
+                                <p class="post-excerpt">Process Study 내용을 공유합니다.</p>
+                                <div class="post-meta">
+                                    <span class="post-date">
+                                        <i class="fas fa-calendar"></i>
+                                        2025-09-28
+                                    </span>
+                                    <span class="post-author">
+                                        <i class="fas fa-user"></i>
+                                        NohYeongO
+                                    </span>
+                                    <div class="post-tags">
+                                        <span class="tag">OS</span><span class="tag">Process</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
                     
                         <article class="blog-post-card" onclick="window.location.href='../posts/devblog/jvm.html'">
                             <div class="post-card-content">
