@@ -1,4 +1,4 @@
-/* 즉시 다크모드 적용을 위한 기본 스타일 */
+/* 즉시 다크모드 적용을 위한 기본 스타일 - 최우선 적용 */
 html[data-theme="dark"] {
     background-color: #0f172a !important;
 }
@@ -24,6 +24,23 @@ html[data-theme="dark"] .contact-section {
 
 html[data-theme="dark"] .blog-section {
     background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
+}
+
+/* 페이지 전환 시 깜빡임 방지를 위한 추가 스타일 */
+html[data-theme="dark"] .main-content {
+    background-color: #0f172a !important;
+}
+
+html[data-theme="dark"] .container {
+    background-color: transparent !important;
+}
+
+html[data-theme="dark"] .post-detail {
+    background-color: transparent !important;
+}
+
+html[data-theme="dark"] .post-detail-content {
+    background-color: transparent !important;
 }
 
 /* CSS Variables for Theme Management */

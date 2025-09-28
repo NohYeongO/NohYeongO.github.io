@@ -21,10 +21,39 @@ class ThemeManager {
             document.documentElement.style.backgroundColor = '#0f172a';
             document.body.style.backgroundColor = '#0f172a';
             document.body.style.color = '#f8fafc';
+            
+            // 모든 주요 섹션에 즉시 다크 배경 적용
+            const sections = document.querySelectorAll('.hero-section, .contact-section, .blog-section, .main-content');
+            sections.forEach(section => {
+                if (section) {
+                    section.style.backgroundColor = '#0f172a';
+                }
+            });
+            
+            // 네비게이션 바 즉시 적용
+            const navbar = document.querySelector('.navbar');
+            if (navbar) {
+                navbar.style.backgroundColor = '#0f172a';
+                navbar.style.borderBottomColor = '#334155';
+            }
         } else {
             document.documentElement.style.backgroundColor = '';
             document.body.style.backgroundColor = '';
             document.body.style.color = '';
+            
+            // 라이트 모드로 전환 시 스타일 초기화
+            const sections = document.querySelectorAll('.hero-section, .contact-section, .blog-section, .main-content');
+            sections.forEach(section => {
+                if (section) {
+                    section.style.backgroundColor = '';
+                }
+            });
+            
+            const navbar = document.querySelector('.navbar');
+            if (navbar) {
+                navbar.style.backgroundColor = '';
+                navbar.style.borderBottomColor = '';
+            }
         }
         
         const themeToggle = document.getElementById('theme-toggle');

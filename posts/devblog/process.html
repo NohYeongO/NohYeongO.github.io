@@ -36,6 +36,45 @@
     
     <!-- Styles -->
     <link rel="stylesheet" href="../../css/style.css">
+    
+    <!-- Prevent Flash of Unstyled Content (FOUC) -->
+    <style>
+        /* 즉시 다크모드 적용을 위한 인라인 스타일 */
+        html[data-theme="dark"] {
+            background-color: #0f172a !important;
+        }
+        html[data-theme="dark"] body {
+            background-color: #0f172a !important;
+            color: #f8fafc !important;
+        }
+        html[data-theme="dark"] .navbar {
+            background-color: #0f172a !important;
+            border-bottom-color: #334155 !important;
+        }
+        html[data-theme="dark"] .hero-section {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
+        }
+        html[data-theme="dark"] .contact-section {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%) !important;
+        }
+        html[data-theme="dark"] .blog-section {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) !important;
+        }
+    </style>
+    <script>
+        // 즉시 테마를 적용하여 깜빡임 방지
+        (function() {
+            const theme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', theme);
+            
+            // 다크모드일 때 즉시 배경색 설정
+            if (theme === 'dark') {
+                document.documentElement.style.backgroundColor = '#0f172a';
+                document.body.style.backgroundColor = '#0f172a';
+                document.body.style.color = '#f8fafc';
+            }
+        })();
+    </script>
 </head>
 <body>
     <!-- Navigation Container -->
