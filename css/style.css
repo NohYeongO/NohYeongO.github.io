@@ -1332,6 +1332,10 @@ body {
         text-align: center;
     }
     
+    .hero-actions {
+        justify-content: center;
+    }
+    
     .hero-visual {
         height: 400px;
     }
